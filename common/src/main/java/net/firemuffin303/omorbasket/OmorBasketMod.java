@@ -34,12 +34,12 @@ public class OmorBasketMod {
                 .getHolderOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation("minecraft", "empty")));
 
         server.registryAccess().registryOrThrow(Registries.TEMPLATE_POOL).getOptional(poolIdentifier).ifPresentOrElse((structurePool) -> {
-            SinglePoolElement compostPilePool = (SinglePoolElement) StructurePoolElement.legacy(nbtIdentifier.toString(), emptyProcessorList).apply(StructureTemplatePool.Projection.RIGID);
+            SinglePoolElement singlePoolElement = (SinglePoolElement) StructurePoolElement.legacy(nbtIdentifier.toString(), emptyProcessorList).apply(StructureTemplatePool.Projection.RIGID);
             List<Pair<StructurePoolElement, Integer>> elementCounts = new ArrayList(((StructurePoolAccessorMixin)structurePool).getRawTemplates());
-            elementCounts.add(Pair.of(compostPilePool, weight));
+            elementCounts.add(Pair.of(singlePoolElement, weight));
             ((StructurePoolAccessorMixin)structurePool).setRawTemplates(elementCounts);
             IntStream.range(0, weight).forEach((value) -> {
-                ((StructurePoolAccessorMixin)structurePool).getTemplates().add(compostPilePool);
+                ((StructurePoolAccessorMixin)structurePool).getTemplates().add(singlePoolElement);
                 //LOGGER.info( ((StructurePoolAccessorMixin)structurePool).getTemplates().toString());
 
             });
