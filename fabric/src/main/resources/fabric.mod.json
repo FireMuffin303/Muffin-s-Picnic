@@ -24,7 +24,7 @@
     ]
   },
   "mixins": [
-    "examplemod.mixins.json",
+    "omorbasket.mixins.json",
     "omorbasket-common.mixins.json"
   ],
   "depends": {
