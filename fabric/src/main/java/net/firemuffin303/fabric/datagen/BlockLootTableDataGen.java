@@ -22,10 +22,7 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        this.add(ModBlocks.RED_PICNIC_BASKET,(block) -> {
-            return this.createPicnicBasket(ModBlocks.RED_PICNIC_BASKET);
-        });
-
+        ModBlocks.PICNIC.forEach((block) -> this.add(block,this::createPicnicBasket));
     }
 
     public net.minecraft.world.level.storage.loot.LootTable.Builder createPicnicBasket(Block block) {

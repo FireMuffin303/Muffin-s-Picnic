@@ -1,4 +1,19 @@
 {
-  "block.omorbasket.picnic_basket": "Picnic Basket",
+  "block.omorbasket.black_picnic_basket": "Black Picnic Basket",
+  "block.omorbasket.blue_picnic_basket": "Blue Picnic Basket",
+  "block.omorbasket.brown_picnic_basket": "Brown Picnic Basket",
+  "block.omorbasket.cyan_picnic_basket": "Cyan Picnic Basket",
+  "block.omorbasket.gray_picnic_basket": "Gray Picnic Basket",
+  "block.omorbasket.green_picnic_basket": "Green Picnic Basket",
+  "block.omorbasket.light_blue_picnic_basket": "Light Blue Picnic Basket",
+  "block.omorbasket.light_gray_picnic_basket": "Light Gray Picnic Basket",
+  "block.omorbasket.lime_picnic_basket": "Lime Picnic Basket",
+  "block.omorbasket.magenta_picnic_basket": "Magenta Picnic Basket",
+  "block.omorbasket.orange_picnic_basket": "Orange Picnic Basket",
+  "block.omorbasket.pink_picnic_basket": "Pink Picnic Basket",
+  "block.omorbasket.purple_picnic_basket": "Purple Picnic Basket",
+  "block.omorbasket.red_picnic_basket": "Red Picnic Basket",
+  "block.omorbasket.white_picnic_basket": "White Picnic Basket",
+  "block.omorbasket.yellow_picnic_basket": "Yellow Picnic Basket",
   "omorbasket.container.basket": "Picnic Basket"
 }

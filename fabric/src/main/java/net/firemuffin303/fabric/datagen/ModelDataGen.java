@@ -16,7 +16,6 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.Optional;
 
 public class ModelDataGen extends FabricModelProvider {
-    private static final ModelTemplate PICNIC_BASKET = createModBlock("pastle_3d_template", TextureSlot.LAYER0);
 
     public ModelDataGen(FabricDataOutput output) {
         super(output);
@@ -24,8 +23,10 @@ public class ModelDataGen extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
-        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.RED_PICNIC_BASKET, Variant.variant().with(VariantProperties.MODEL,new ResourceLocation("omorbasket","block/picnic_basket")))
-                .with(BlockModelGenerators.createHorizontalFacingDispatch()));
+        ModBlocks.PICNIC.forEach((block) -> {
+            blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block,Variant.variant().with(VariantProperties.MODEL,new ResourceLocation("omorbasket","block/picnic_basket")))
+                    .with(BlockModelGenerators.createHorizontalFacingDispatch()));
+        });
     }
 
     @Override

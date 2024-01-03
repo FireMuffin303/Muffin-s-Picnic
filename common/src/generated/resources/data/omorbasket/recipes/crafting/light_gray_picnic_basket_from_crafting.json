@@ -3,10 +3,10 @@
   "category": "equipment",
   "key": {
     "A": {
-      "item": "minecraft:spruce_slab"
+      "tag": "minecraft:wooden_slabs"
     },
     "B": {
-      "item": "minecraft:red_carpet"
+      "item": "minecraft:light_gray_carpet"
     }
   },
   "pattern": [
@@ -14,7 +14,7 @@
     "AAA"
   ],
   "result": {
-    "item": "omorbasket:picnic_basket"
+    "item": "omorbasket:light_gray_picnic_basket"
   },
   "show_notification": true
 }

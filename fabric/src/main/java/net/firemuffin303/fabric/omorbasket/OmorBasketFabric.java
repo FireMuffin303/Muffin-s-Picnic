@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.firemuffin303.omorbasket.OmorBasketMod;
 import net.fabricmc.api.ModInitializer;
+import net.firemuffin303.omorbasket.common.registry.ModBlocks;
 import net.firemuffin303.omorbasket.common.registry.ModItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -19,7 +20,7 @@ public class OmorBasketFabric implements ModInitializer {
         OmorBasketMod.init();
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.FUNCTIONAL_BLOCKS).register(content -> {
-            content.accept(ModItems.RED_PICNIC_BASKET);
+            ModItems.PICNIC.forEach(content::accept);
         });
 
         ServerLifecycleEvents.SERVER_STARTING.register((server) ->{
