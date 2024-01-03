@@ -8,10 +8,8 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.common.CreativeModeTabRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -42,7 +40,7 @@ public class OmorBasketForge {
 
     public void registerCreativeTabModify(BuildCreativeModeTabContentsEvent event){
         if(event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS){
-            event.accept(ModItems.PICNIC_BASKET);
+            event.accept(ModItems.RED_PICNIC_BASKET);
         }
     }
 

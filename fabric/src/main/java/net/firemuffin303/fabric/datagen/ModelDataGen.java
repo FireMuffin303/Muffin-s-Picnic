@@ -9,7 +9,6 @@ import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.data.models.blockstates.Variant;
 import net.minecraft.data.models.blockstates.VariantProperties;
-import net.minecraft.data.models.blockstates.VariantProperty;
 import net.minecraft.data.models.model.ModelTemplate;
 import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
@@ -25,7 +24,7 @@ public class ModelDataGen extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
-        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.PICNIC_BASKET, Variant.variant().with(VariantProperties.MODEL,new ResourceLocation("omorbasket","block/picnic_basket")))
+        blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(ModBlocks.RED_PICNIC_BASKET, Variant.variant().with(VariantProperties.MODEL,new ResourceLocation("omorbasket","block/picnic_basket")))
                 .with(BlockModelGenerators.createHorizontalFacingDispatch()));
     }
 

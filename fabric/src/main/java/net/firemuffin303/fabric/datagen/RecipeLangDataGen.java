@@ -17,7 +17,7 @@ public class RecipeLangDataGen extends FabricRecipeProvider {
 
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> exporter) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.PICNIC_BASKET,1).define('A', Items.SPRUCE_SLAB).define('B',Items.RED_CARPET).pattern("ABA").pattern("AAA").unlockedBy(getHasName(Items.SPRUCE_SLAB),has(Items.SPRUCE_SLAB)).save(exporter,"crafting/"+getItemName(ModItems.PICNIC_BASKET)+"_from_crafting");
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.RED_PICNIC_BASKET,1).define('A', Items.SPRUCE_SLAB).define('B',Items.RED_CARPET).pattern("ABA").pattern("AAA").unlockedBy(getHasName(Items.SPRUCE_SLAB),has(Items.SPRUCE_SLAB)).save(exporter,"crafting/"+getItemName(ModItems.RED_PICNIC_BASKET)+"_from_crafting");
 
     }
 }

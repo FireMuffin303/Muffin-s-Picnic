@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 
 public class ModBlocks {
-    public static final Block PICNIC_BASKET = new BasketBlock(
+    public static final Block RED_PICNIC_BASKET = new BasketBlock(
             BlockBehaviour.Properties.of()
                             .mapColor(MapColor.WOOD)
                     .instrument(NoteBlockInstrument.BASS)
@@ -19,15 +19,18 @@ public class ModBlocks {
                     .instabreak()
                     .ignitedByLava().noOcclusion());
 
+    public static final Block BLUE_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.RED_PICNIC_BASKET));
+
     public static void init(){
-        ModPlatform.registryBlock("picnic_basket",() -> PICNIC_BASKET);
+        ModPlatform.registryBlock("red_picnic_basket",() -> RED_PICNIC_BASKET);
+        ModPlatform.registryBlock("blue_picnic_basket",() -> BLUE_PICNIC_BASKET);
     }
 
     public static class ModBlockEntityTypes {
         public static BlockEntityType<BasketBlockEntity> BASKET_BLOCK_ENTITY;
 
         public static void init(){
-            BASKET_BLOCK_ENTITY = ModPlatform.registerBlockEntity("picnic_basket",BasketBlockEntity::new, ModBlocks.PICNIC_BASKET);
+            BASKET_BLOCK_ENTITY = ModPlatform.registerBlockEntity("picnic_basket",BasketBlockEntity::new, ModBlocks.RED_PICNIC_BASKET);
         }
     }
 }

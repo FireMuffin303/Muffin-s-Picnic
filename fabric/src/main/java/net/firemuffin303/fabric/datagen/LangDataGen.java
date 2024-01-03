@@ -12,7 +12,7 @@ public class LangDataGen extends FabricLanguageProvider {
     @Override
     public void generateTranslations(TranslationBuilder translationBuilder) {
         translationBuilder.add("omorbasket.container.basket","Picnic Basket");
-        translationBuilder.add(ModItems.PICNIC_BASKET,"Picnic Basket");
+        translationBuilder.add(ModItems.RED_PICNIC_BASKET,"Picnic Basket");
 
     }
 }

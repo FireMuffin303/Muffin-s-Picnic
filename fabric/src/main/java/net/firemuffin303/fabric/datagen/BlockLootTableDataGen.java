@@ -5,7 +5,6 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
@@ -23,8 +22,8 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        this.add(ModBlocks.PICNIC_BASKET,(block) -> {
-            return this.createPicnicBasket(ModBlocks.PICNIC_BASKET);
+        this.add(ModBlocks.RED_PICNIC_BASKET,(block) -> {
+            return this.createPicnicBasket(ModBlocks.RED_PICNIC_BASKET);
         });
 
     }

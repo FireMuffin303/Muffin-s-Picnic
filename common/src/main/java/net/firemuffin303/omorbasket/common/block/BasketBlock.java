@@ -63,7 +63,7 @@ public class BasketBlock extends BaseEntityBlock {
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity instanceof BasketBlockEntity basketBlockEntity) {
             if (!level.isClientSide && player.isCreative() && !basketBlockEntity.isEmpty()) {
-                ItemStack itemStack = new ItemStack(ModBlocks.PICNIC_BASKET);
+                ItemStack itemStack = new ItemStack(ModBlocks.RED_PICNIC_BASKET);
                 blockEntity.saveToItem(itemStack);
                 if (basketBlockEntity.hasCustomName()) {
                     itemStack.setHoverName(basketBlockEntity.getCustomName());

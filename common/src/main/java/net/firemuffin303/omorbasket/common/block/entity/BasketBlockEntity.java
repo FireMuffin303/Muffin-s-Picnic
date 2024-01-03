@@ -79,7 +79,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity {
 
     @Override
     protected AbstractContainerMenu createMenu(int i, Inventory inventory) {
-        return new ChestMenu(MenuType.GENERIC_9x1,i,inventory,this,1);
+        return new ChestMenu(MenuType.GENERIC_3x3,i,inventory,this,1);
     }
 
     @Override
