@@ -12,6 +12,7 @@ import net.minecraft.world.item.Items;
 import java.util.function.Consumer;
 
 public class RecipeLangDataGen extends FabricRecipeProvider {
+
     public RecipeLangDataGen(FabricDataOutput output) {
         super(output);
     }

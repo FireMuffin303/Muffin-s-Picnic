@@ -21,8 +21,13 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
@@ -32,15 +37,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class BasketBlock extends BaseEntityBlock {
+public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlock{
     public static final DirectionProperty FACING;
     public static final ResourceLocation CONTENTS;
-    public static final VoxelShape R_AABB = Block.box(2.0D, 0.0D, 1.0D, 14.0D, 8.0D, 15.0D);
-    public static final VoxelShape AABB = Block.box(1.0D, 0.0D, 2.0D, 15.0D, 8.0D, 14.0D);
+    public static final BooleanProperty WATERLOGGED;
+    public static final VoxelShape R_AABB = Block.box(2.0D, 0.0D, 1.0D, 14.0D, 10.0D, 15.0D);
+    public static final VoxelShape AABB = Block.box(1.0D, 0.0D, 2.0D, 15.0D, 10.0D, 14.0D);
 
     public BasketBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any().setValue(FACING, Direction.NORTH)));
+        this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any().setValue(FACING, Direction.NORTH)).setValue(WATERLOGGED,false));
 
     }
 
@@ -146,7 +152,8 @@ public class BasketBlock extends BaseEntityBlock {
 
 
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        return (BlockState)this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite());
+        FluidState fluidState = blockPlaceContext.getLevel().getFluidState(blockPlaceContext.getClickedPos());
+        return (BlockState)this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
     @Nullable
@@ -156,11 +163,16 @@ public class BasketBlock extends BaseEntityBlock {
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING});
+        builder.add(new Property[]{FACING,WATERLOGGED});
+    }
+
+    public boolean isPathfindable(BlockState arg, BlockGetter arg2, BlockPos arg3, PathComputationType arg4) {
+        return false;
     }
 
     static{
         FACING = HorizontalDirectionalBlock.FACING;
+        WATERLOGGED = BlockStateProperties.WATERLOGGED;
         CONTENTS = new ResourceLocation("contents");
     }
 }
