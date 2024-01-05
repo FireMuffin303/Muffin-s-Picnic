@@ -3,7 +3,9 @@ package net.firemuffin303.omorbasket.forge;
 import net.firemuffin303.omorbasket.OmorBasketMod;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
 import net.firemuffin303.omorbasket.common.registry.ModItems;
+import net.firemuffin303.omorbasket.common.registry.ModMenuType;
 import net.firemuffin303.omorbasket.forge.structure.VillageStructures;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -21,6 +23,7 @@ import net.minecraftforge.registries.RegisterEvent;
 @Mod(OmorBasketMod.MOD_ID)
 public class OmorBasketForge {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES,OmorBasketMod.MOD_ID);
+    public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(ForgeRegistries.MENU_TYPES,OmorBasketMod.MOD_ID);
     public static final DeferredRegister<Block> BLOCK = DeferredRegister.create(ForgeRegistries.BLOCKS,OmorBasketMod.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,OmorBasketMod.MOD_ID);
 
@@ -29,6 +32,7 @@ public class OmorBasketForge {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         //OmorBasketMod.init();
         modEventBus.register(this);
+        MENU_TYPE.register(modEventBus);
         BLOCK_ENTITY_TYPES.register(modEventBus);
         BLOCK.register(modEventBus);
         ITEMS.register(modEventBus);
@@ -45,6 +49,7 @@ public class OmorBasketForge {
     }
 
     public void registerEvent(RegisterEvent registerEvent){
+        registerEvent.register(ForgeRegistries.Keys.MENU_TYPES,helper -> ModMenuType.init());
         registerEvent.register(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES,helper -> ModBlocks.ModBlockEntityTypes.init());
         registerEvent.register(ForgeRegistries.Keys.BLOCKS,helper -> ModBlocks.init());
         registerEvent.register(ForgeRegistries.Keys.ITEMS,helper -> ModItems.init());

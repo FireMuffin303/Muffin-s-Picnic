@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "omorbasket:white_picnic_basket",
+    "omorbasket:light_gray_picnic_basket",
+    "omorbasket:gray_picnic_basket",
+    "omorbasket:black_picnic_basket",
+    "omorbasket:brown_picnic_basket",
+    "omorbasket:red_picnic_basket",
+    "omorbasket:orange_picnic_basket",
+    "omorbasket:yellow_picnic_basket",
+    "omorbasket:lime_picnic_basket",
+    "omorbasket:green_picnic_basket",
+    "omorbasket:cyan_picnic_basket",
+    "omorbasket:light_blue_picnic_basket",
+    "omorbasket:blue_picnic_basket",
+    "omorbasket:purple_picnic_basket",
+    "omorbasket:magenta_picnic_basket",
+    "omorbasket:pink_picnic_basket"
+  ]
+}

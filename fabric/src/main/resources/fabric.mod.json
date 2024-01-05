@@ -18,6 +18,9 @@
     "main": [
       "net.firemuffin303.fabric.omorbasket.OmorBasketFabric"
     ],
+    "client": [
+      "net.firemuffin303.fabric.omorbasket.client.PicnicBasketFabricClient"
+    ],
 
     "fabric-datagen": [
       "net.firemuffin303.fabric.datagen.ModDataGen"

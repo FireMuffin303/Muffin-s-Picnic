@@ -2,13 +2,18 @@ package net.firemuffin303.omorbasket.util.forge;
 
 import net.firemuffin303.omorbasket.forge.OmorBasketForge;
 import net.firemuffin303.omorbasket.util.ModPlatform;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -42,7 +47,13 @@ public class ModPlatformImpl {
         return BlockEntityType.Builder.of(blockEntityTypeSupplier::create,block);
     }
 
-    public static <T extends AbstractContainerMenu> void registryMenu(String id, ModPlatform.MenuSupplier<T> menu) {
+    public static <T extends AbstractContainerMenu> MenuType<T> registryMenu(String id, ModPlatform.MenuSupplier<T> menu) {
+        MenuType<T> menuType = new MenuType(menu::create, FeatureFlags.VANILLA_SET);
+        OmorBasketForge.MENU_TYPE.register(id,() -> menuType);
+        return menuType;
+    }
 
+    public static <M extends AbstractContainerMenu,U extends Screen & MenuAccess<M>> void registerScreen(MenuType<M> menuType, ModPlatform.ScreenConstructor<M, U> screen) {
+        MenuScreens.register(menuType,screen::create);
     }
 }

@@ -3,6 +3,7 @@ package net.firemuffin303.omorbasket.common.registry;
 import net.firemuffin303.omorbasket.common.block.BasketBlock;
 import net.firemuffin303.omorbasket.common.block.entity.BasketBlockEntity;
 import net.firemuffin303.omorbasket.util.ModPlatform;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class ModBlocks {
     public static final ArrayList<Block> PICNIC = new ArrayList<>();
 
-    public static final Block WHITE_PICNIC_BASKET = new BasketBlock(
+    public static final Block WHITE_PICNIC_BASKET = new BasketBlock(DyeColor.WHITE,
             BlockBehaviour.Properties.of()
                             .mapColor(MapColor.WOOD)
                     .instrument(NoteBlockInstrument.BASS)
@@ -23,21 +24,21 @@ public class ModBlocks {
                     .instabreak()
                     .ignitedByLava().noOcclusion());
 
-    public static final Block LIGHT_GRAY_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block GRAY_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block BLACK_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block BROWN_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block RED_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block ORANGE_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block YELLOW_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block LIME_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block GREEN_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block CYAN_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block LIGHT_BLUE_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block BLUE_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block PURPLE_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block MAGENTA_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
-    public static final Block PINK_PICNIC_BASKET = new BasketBlock(BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block LIGHT_GRAY_PICNIC_BASKET = new BasketBlock(DyeColor.LIGHT_GRAY,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block GRAY_PICNIC_BASKET = new BasketBlock(DyeColor.GRAY,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block BLACK_PICNIC_BASKET = new BasketBlock(DyeColor.BLACK,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block BROWN_PICNIC_BASKET = new BasketBlock(DyeColor.BROWN,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block RED_PICNIC_BASKET = new BasketBlock(DyeColor.RED,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block ORANGE_PICNIC_BASKET = new BasketBlock(DyeColor.ORANGE,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block YELLOW_PICNIC_BASKET = new BasketBlock(DyeColor.YELLOW,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block LIME_PICNIC_BASKET = new BasketBlock(DyeColor.LIME,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block GREEN_PICNIC_BASKET = new BasketBlock(DyeColor.GREEN,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block CYAN_PICNIC_BASKET = new BasketBlock(DyeColor.CYAN,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block LIGHT_BLUE_PICNIC_BASKET = new BasketBlock(DyeColor.LIGHT_BLUE,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block BLUE_PICNIC_BASKET = new BasketBlock(DyeColor.BLUE,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block PURPLE_PICNIC_BASKET = new BasketBlock(DyeColor.PURPLE,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block MAGENTA_PICNIC_BASKET = new BasketBlock(DyeColor.MAGENTA,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
+    public static final Block PINK_PICNIC_BASKET = new BasketBlock(DyeColor.PINK,BlockBehaviour.Properties.copy(ModBlocks.WHITE_PICNIC_BASKET));
 
     public static void init(){
         register("white_picnic_basket",WHITE_PICNIC_BASKET);

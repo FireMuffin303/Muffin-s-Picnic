@@ -2,7 +2,9 @@ package net.firemuffin303.omorbasket.common.block.entity;
 
 import net.firemuffin303.omorbasket.OmorBasketMod;
 import net.firemuffin303.omorbasket.common.block.BasketBlock;
+import net.firemuffin303.omorbasket.common.menu.PicnicBasketMenu;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
+import net.firemuffin303.omorbasket.common.registry.ModMenuType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -19,19 +21,26 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.ChestLidController;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
+import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-public class BasketBlockEntity extends RandomizableContainerBlockEntity {
+public class BasketBlockEntity extends RandomizableContainerBlockEntity implements LidBlockEntity {
     private NonNullList<ItemStack> items;
     private final ContainerOpenersCounter openersCounter;
+    private final ChestLidController chestLidController = new ChestLidController();
+    private final DyeColor color;
 
     public BasketBlockEntity( BlockPos blockPos, BlockState blockState) {
         super(ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY, blockPos, blockState);
         this.items = NonNullList.withSize(9, ItemStack.EMPTY);
+        this.color = BasketBlock.getColorFromBlock(blockState.getBlock());
         this.openersCounter = new ContainerOpenersCounter() {
             protected void onOpen(Level level, BlockPos blockPos, BlockState blockState) {
                 BasketBlockEntity.this.playSound(blockState, SoundEvents.BARREL_OPEN);
@@ -63,6 +72,10 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity {
 
     }
 
+    public DyeColor getColor() {
+        return this.color;
+    }
+
     public void load(CompoundTag compoundTag) {
         super.load(compoundTag);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
@@ -79,7 +92,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity {
 
     @Override
     protected AbstractContainerMenu createMenu(int i, Inventory inventory) {
-        return new ChestMenu(MenuType.GENERIC_3x3,i,inventory,this,1);
+        return new PicnicBasketMenu(i,inventory,this);
     }
 
     @Override
@@ -117,5 +130,10 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity {
         double e = (double)this.worldPosition.getY() + 0.5D + (double)vec3i.getY() / 2.0D;
         double f = (double)this.worldPosition.getZ() + 0.5D + (double)vec3i.getZ() / 2.0D;
         this.level.playSound((Player)null, d, e, f, soundEvent, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
+    }
+
+    @Override
+    public float getOpenNess(float f) {
+        return this.chestLidController.getOpenness(f);
     }
 }

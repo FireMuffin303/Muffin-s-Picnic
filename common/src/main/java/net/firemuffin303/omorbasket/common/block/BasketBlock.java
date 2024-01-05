@@ -13,12 +13,14 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -35,7 +37,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlock{
     public static final DirectionProperty FACING;
@@ -43,9 +47,11 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     public static final BooleanProperty WATERLOGGED;
     public static final VoxelShape R_AABB = Block.box(2.0D, 0.0D, 1.0D, 14.0D, 10.0D, 15.0D);
     public static final VoxelShape AABB = Block.box(1.0D, 0.0D, 2.0D, 15.0D, 10.0D, 14.0D);
+    private final DyeColor color;
 
-    public BasketBlock(Properties properties) {
+    public BasketBlock(DyeColor dyeColor,Properties properties) {
         super(properties);
+        this.color = dyeColor;
         this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any().setValue(FACING, Direction.NORTH)).setValue(WATERLOGGED,false));
 
     }
@@ -69,7 +75,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity instanceof BasketBlockEntity basketBlockEntity) {
             if (!level.isClientSide && player.isCreative() && !basketBlockEntity.isEmpty()) {
-                ItemStack itemStack = new ItemStack(ModBlocks.WHITE_PICNIC_BASKET);
+                ItemStack itemStack = new ItemStack(getBlockByColor(this.getColor()));
                 blockEntity.saveToItem(itemStack);
                 if (basketBlockEntity.hasCustomName()) {
                     itemStack.setHoverName(basketBlockEntity.getCustomName());
@@ -129,6 +135,14 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
         }
     }
 
+    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+        ItemStack itemStack = super.getCloneItemStack(blockGetter, blockPos, blockState);
+        blockGetter.getBlockEntity(blockPos, ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY).ifPresent((basketBlockEntity) -> {
+            basketBlockEntity.saveToItem(itemStack);
+        });
+        return itemStack;
+    }
+
     public RenderShape getRenderShape(BlockState blockState) {
         return RenderShape.MODEL;
     }
@@ -149,7 +163,15 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
         return blockState.rotate(mirror.getRotation((Direction)blockState.getValue(FACING)));
     }
 
+    @Nullable
+    public DyeColor getColor() {
+        return this.color;
+    }
 
+    @Nullable
+    public static DyeColor getColorFromBlock(Block block) {
+        return block instanceof BasketBlock ? ((BasketBlock)block).getColor() : null;
+    }
 
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
         FluidState fluidState = blockPlaceContext.getLevel().getFluidState(blockPlaceContext.getClickedPos());
@@ -168,6 +190,28 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
     public boolean isPathfindable(BlockState arg, BlockGetter arg2, BlockPos arg3, PathComputationType arg4) {
         return false;
+    }
+
+    public static Block getBlockByColor(@Nullable DyeColor color){
+        Map<DyeColor,Block> map = new HashMap<>();
+        map.put(DyeColor.WHITE,ModBlocks.WHITE_PICNIC_BASKET);
+        map.put(DyeColor.LIGHT_GRAY,ModBlocks.LIGHT_GRAY_PICNIC_BASKET);
+        map.put(DyeColor.GRAY,ModBlocks.GRAY_PICNIC_BASKET);
+        map.put(DyeColor.BLACK,ModBlocks.BLACK_PICNIC_BASKET);
+        map.put(DyeColor.BROWN,ModBlocks.BROWN_PICNIC_BASKET);
+        map.put(DyeColor.RED,ModBlocks.RED_PICNIC_BASKET);
+        map.put(DyeColor.ORANGE,ModBlocks.ORANGE_PICNIC_BASKET);
+        map.put(DyeColor.YELLOW,ModBlocks.YELLOW_PICNIC_BASKET);
+        map.put(DyeColor.LIME,ModBlocks.LIME_PICNIC_BASKET);
+        map.put(DyeColor.GREEN,ModBlocks.GREEN_PICNIC_BASKET);
+        map.put(DyeColor.CYAN,ModBlocks.CYAN_PICNIC_BASKET);
+        map.put(DyeColor.LIGHT_BLUE,ModBlocks.LIGHT_BLUE_PICNIC_BASKET);
+        map.put(DyeColor.BLUE,ModBlocks.BLUE_PICNIC_BASKET);
+        map.put(DyeColor.PURPLE,ModBlocks.PURPLE_PICNIC_BASKET);
+        map.put(DyeColor.MAGENTA,ModBlocks.MAGENTA_PICNIC_BASKET);
+        map.put(DyeColor.PINK,ModBlocks.PINK_PICNIC_BASKET);
+
+        return map.get(color);
     }
 
     static{

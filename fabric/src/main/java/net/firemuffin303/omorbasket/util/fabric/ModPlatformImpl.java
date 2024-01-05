@@ -1,8 +1,12 @@
 package net.firemuffin303.omorbasket.util.fabric;
 
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.firemuffin303.omorbasket.OmorBasketMod;
 import net.firemuffin303.omorbasket.util.ModPlatform;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -47,8 +51,12 @@ public class ModPlatformImpl {
         return blockEntityType;
     }
 
-    public static <T extends AbstractContainerMenu> void registryMenu(String id, ModPlatform.MenuSupplier<T> menu) {
-        Registry.register(BuiltInRegistries.MENU,new ResourceLocation(OmorBasketMod.MOD_ID,id),new MenuType(menu::create, FeatureFlags.VANILLA_SET));
+    public static <T extends AbstractContainerMenu> MenuType<T> registryMenu(String id, ModPlatform.MenuSupplier<T> menu) {
+        return Registry.register(BuiltInRegistries.MENU,new ResourceLocation(OmorBasketMod.MOD_ID,id),new MenuType(menu::create, FeatureFlags.VANILLA_SET));
+    }
+
+    public static <M extends AbstractContainerMenu,U extends Screen & MenuAccess<M>> void registerScreen(MenuType<M> menuType, ModPlatform.ScreenConstructor<M, U> screen) {
+        MenuScreens.register(menuType,screen::create);
     }
 
 }

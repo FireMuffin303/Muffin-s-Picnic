@@ -1,8 +1,10 @@
 package net.firemuffin303.omorbasket;
 
 import com.mojang.datafixers.util.Pair;
+import net.firemuffin303.omorbasket.client.registry.ModScreens;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
 import net.firemuffin303.omorbasket.common.registry.ModItems;
+import net.firemuffin303.omorbasket.common.registry.ModMenuType;
 import net.firemuffin303.omorbasket.mixin.StructurePoolAccessorMixin;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -24,6 +26,7 @@ public class OmorBasketMod {
 
 
     public static void init() {
+        ModMenuType.init();
         ModBlocks.ModBlockEntityTypes.init();
         ModBlocks.init();
         ModItems.init();
