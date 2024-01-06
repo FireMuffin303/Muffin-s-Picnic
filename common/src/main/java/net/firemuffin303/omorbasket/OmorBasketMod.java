@@ -1,12 +1,12 @@
 package net.firemuffin303.omorbasket;
 
 import com.mojang.datafixers.util.Pair;
-import net.firemuffin303.omorbasket.client.registry.ModScreens;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
 import net.firemuffin303.omorbasket.common.registry.ModItems;
 import net.firemuffin303.omorbasket.common.registry.ModMenuType;
 import net.firemuffin303.omorbasket.mixin.StructurePoolAccessorMixin;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -18,12 +18,9 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class OmorBasketMod {
     public static final String MOD_ID = "omorbasket";
-
-
 
     public static void init() {
         ModMenuType.init();
@@ -32,23 +29,29 @@ public class OmorBasketMod {
         ModItems.init();
     }
 
-    //Credit to FarmerDelightFabric
+    public static void initVillagerStructures(MinecraftServer server){
+        addToStructurePool(server,new ResourceLocation("minecraft","village/plains/houses"),new ResourceLocation(OmorBasketMod.MOD_ID, "village/plains/picnic"),2);
+    }
+
+    //Learned how it worked from Farmer's Delight Fabric
     public static void addToStructurePool(MinecraftServer server, ResourceLocation poolIdentifier, ResourceLocation nbtIdentifier, int weight) {
-        Holder.Reference<StructureProcessorList> emptyProcessorList = server.registryAccess().registryOrThrow(Registries.PROCESSOR_LIST)
-                .getHolderOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation("minecraft", "empty")));
+        Holder<StructureProcessorList> emptyProcessList = server.registryAccess().registryOrThrow(Registries.PROCESSOR_LIST).getHolderOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation("minecraft", "empty")));
+        Registry<StructureTemplatePool> structureTemplatePools = server.registryAccess().registry(Registries.TEMPLATE_POOL).orElseThrow();
 
-        server.registryAccess().registryOrThrow(Registries.TEMPLATE_POOL).getOptional(poolIdentifier).ifPresentOrElse((structurePool) -> {
-            SinglePoolElement singlePoolElement = (SinglePoolElement) StructurePoolElement.legacy(nbtIdentifier.toString(), emptyProcessorList).apply(StructureTemplatePool.Projection.RIGID);
-            List<Pair<StructurePoolElement, Integer>> elementCounts = new ArrayList(((StructurePoolAccessorMixin)structurePool).getRawTemplates());
-            elementCounts.add(Pair.of(singlePoolElement, weight));
-            ((StructurePoolAccessorMixin)structurePool).setRawTemplates(elementCounts);
-            IntStream.range(0, weight).forEach((value) -> {
-                ((StructurePoolAccessorMixin)structurePool).getTemplates().add(singlePoolElement);
-                //LOGGER.info( ((StructurePoolAccessorMixin)structurePool).getTemplates().toString());
+        StructureTemplatePool structure = structureTemplatePools.get(poolIdentifier);
 
-            });
-        }, () -> {
+        if(structure == null){
+            return;
+        }
 
-        });
+        SinglePoolElement singlePoolElement = StructurePoolElement.legacy(nbtIdentifier.toString(),emptyProcessList).apply(StructureTemplatePool.Projection.RIGID);
+
+        List<Pair<StructurePoolElement,Integer>> elements = new ArrayList<>(((StructurePoolAccessorMixin)structure).getRawTemplates());
+        elements.add(Pair.of(singlePoolElement,weight));
+        ((StructurePoolAccessorMixin)structure).setRawTemplates(elements);
+
+        for(int i = 0; i < weight; i++){
+            ((StructurePoolAccessorMixin)structure).getTemplates().add(singlePoolElement);
+        }
     }
 }

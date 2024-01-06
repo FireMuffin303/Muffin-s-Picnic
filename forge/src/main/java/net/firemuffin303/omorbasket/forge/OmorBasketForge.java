@@ -44,8 +44,8 @@ public class OmorBasketForge {
 
 
     public void registerCreativeTabModify(BuildCreativeModeTabContentsEvent event){
-        if(event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS){
-            event.accept(ModItems.RED_PICNIC_BASKET);
+        if(event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS || event.getTabKey() == CreativeModeTabs.COLORED_BLOCKS){
+            ModItems.PICNIC.forEach(event::accept);
         }
     }
 

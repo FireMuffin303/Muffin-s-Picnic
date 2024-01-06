@@ -23,13 +23,13 @@ public class OmorBasketFabric implements ModInitializer {
             ModItems.PICNIC.forEach(content::accept);
         });
 
-        ServerLifecycleEvents.SERVER_STARTING.register((server) ->{
-            LOGGER.info("Registering structure in village type of plains");
-            OmorBasketMod.addToStructurePool(server,
-                    new ResourceLocation("minecraft","village/plains/houses"),
-                    new ResourceLocation(OmorBasketMod.MOD_ID, "village/plains/picnic"),1);
-
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COLORED_BLOCKS).register(content -> {
+            ModItems.PICNIC.forEach(content::accept);
         });
 
+        ServerLifecycleEvents.SERVER_STARTING.register((server) ->{
+            LOGGER.info("initializing village plains structure");
+            OmorBasketMod.initVillagerStructures(server);
+                });
     }
 }

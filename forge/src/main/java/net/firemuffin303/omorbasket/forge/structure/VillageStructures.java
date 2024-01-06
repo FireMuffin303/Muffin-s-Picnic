@@ -6,8 +6,6 @@ import net.minecraftforge.event.server.ServerAboutToStartEvent;
 
 public class VillageStructures {
     public static void addNewVillageBuilding(ServerAboutToStartEvent event){
-        OmorBasketMod.addToStructurePool(event.getServer(),
-                new ResourceLocation("minecraft","village/plains/houses"),
-                new ResourceLocation(OmorBasketMod.MOD_ID, "village/plains/picnic"),2);
+        OmorBasketMod.initVillagerStructures(event.getServer());
     }
 }
