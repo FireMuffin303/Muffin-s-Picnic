@@ -1,12 +1,17 @@
 package net.firemuffin303.omorbasket.util;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.firemuffin303.omorbasket.common.menu.PicnicBasketMenu;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -23,8 +28,6 @@ import java.util.ArrayList;
 import java.util.function.Supplier;
 
 public class ModPlatform {
-
-
 
     @ExpectPlatform
     public static <T extends Block> Supplier<T> registryBlock(String id, Supplier<T> block){
@@ -47,7 +50,17 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id,ModPlatform.BlockEntitySupplier<T> blockEntityTypeSupplier,Block block){
+    public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id,ModPlatform.BlockEntitySupplier<T> blockEntityTypeSupplier,Block... block){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static <T extends Entity> void registerEntityRenderer(EntityType<T> entityTypeSupplier, EntityRendererProvider<T> entityRendererProvider){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static <E extends BlockEntity> void registerBlockEntityRenderer(BlockEntityType<E> blockEntityType, BlockEntityRendererProvider<? super E> blockEntityRendererFactory){
         throw new AssertionError();
     }
 
@@ -69,5 +82,13 @@ public class ModPlatform {
 
     public interface ScreenConstructor<T extends AbstractContainerMenu, U extends Screen & MenuAccess<T>> {
         U create(T abstractContainerMenu, Inventory inventory, Component component);
+    }
+
+    public static abstract class BlockEntityRendererRegistry {
+        public abstract <T extends BlockEntity> void register(BlockEntityType<T> entityType, BlockEntityRendererProvider<T> blockEntityRendererProvider);
+    }
+
+    public static abstract class LayerDefinitionRegistry {
+        public abstract void register(ModelLayerLocation location, Supplier<LayerDefinition> definition);
     }
 }

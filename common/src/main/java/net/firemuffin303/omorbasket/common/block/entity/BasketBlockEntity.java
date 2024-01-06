@@ -24,10 +24,8 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.ChestLidController;
-import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
-import net.minecraft.world.level.block.entity.LidBlockEntity;
-import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,6 +49,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
             }
 
             protected void openerCountChanged(Level level, BlockPos blockPos, BlockState blockState, int i, int j) {
+                BasketBlockEntity.this.signalOpenCount(level, blockPos, blockState, i, j);
             }
 
             protected boolean isOwnContainer(Player player) {
@@ -135,5 +134,23 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
     @Override
     public float getOpenNess(float f) {
         return this.chestLidController.getOpenness(f);
+    }
+
+    public static void lidAnimateTick(Level level, BlockPos blockPos, BlockState blockState, BasketBlockEntity basketBlockEntity) {
+        basketBlockEntity.chestLidController.tickLid();
+    }
+
+    public boolean triggerEvent(int i, int j) {
+        if (i == 1) {
+            this.chestLidController.shouldBeOpen(j > 0);
+            return true;
+        } else {
+            return super.triggerEvent(i, j);
+        }
+    }
+
+    protected void signalOpenCount(Level level, BlockPos blockPos, BlockState blockState, int i, int j) {
+        Block block = blockState.getBlock();
+        level.blockEvent(blockPos, block, 1, j);
     }
 }

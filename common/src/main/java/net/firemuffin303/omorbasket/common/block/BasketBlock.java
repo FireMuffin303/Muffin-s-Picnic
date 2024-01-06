@@ -20,7 +20,9 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -116,6 +118,12 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
     }
 
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
+        return level.isClientSide ? createTickerHelper(blockEntityType, ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY, BasketBlockEntity::lidAnimateTick) : null;
+    }
+
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return switch (blockState.getValue(FACING)) {
@@ -144,7 +152,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     }
 
     public RenderShape getRenderShape(BlockState blockState) {
-        return RenderShape.MODEL;
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     public boolean hasAnalogOutputSignal(BlockState blockState) {

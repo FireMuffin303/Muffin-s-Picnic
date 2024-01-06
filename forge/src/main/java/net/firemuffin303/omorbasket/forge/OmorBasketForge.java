@@ -42,6 +42,7 @@ public class OmorBasketForge {
         MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
     }
 
+
     public void registerCreativeTabModify(BuildCreativeModeTabContentsEvent event){
         if(event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS){
             event.accept(ModItems.RED_PICNIC_BASKET);

@@ -68,7 +68,11 @@ public class ModBlocks {
         public static BlockEntityType<BasketBlockEntity> BASKET_BLOCK_ENTITY;
 
         public static void init(){
-            BASKET_BLOCK_ENTITY = ModPlatform.registerBlockEntity("picnic_basket",BasketBlockEntity::new, ModBlocks.WHITE_PICNIC_BASKET);
+            BASKET_BLOCK_ENTITY = ModPlatform.registerBlockEntity("picnic_basket",BasketBlockEntity::new,
+                    ModBlocks.WHITE_PICNIC_BASKET,ModBlocks.LIGHT_GRAY_PICNIC_BASKET,ModBlocks.GRAY_PICNIC_BASKET,ModBlocks.BLACK_PICNIC_BASKET,
+                    ModBlocks.BROWN_PICNIC_BASKET,ModBlocks.RED_PICNIC_BASKET,ModBlocks.ORANGE_PICNIC_BASKET,ModBlocks.YELLOW_PICNIC_BASKET,
+                    ModBlocks.LIME_PICNIC_BASKET,ModBlocks.GREEN_PICNIC_BASKET,ModBlocks.CYAN_PICNIC_BASKET,ModBlocks.LIGHT_BLUE_PICNIC_BASKET,
+                    ModBlocks.BLUE_PICNIC_BASKET,ModBlocks.PURPLE_PICNIC_BASKET,ModBlocks.MAGENTA_PICNIC_BASKET,ModBlocks.PINK_PICNIC_BASKET);
         }
     }
 }
