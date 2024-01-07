@@ -66,7 +66,7 @@ public class PicnicBasketRenderer implements BlockEntityRenderer<BasketBlockEnti
             }
         }
 
-        ResourceLocation resourceLocation = MATERIALS.get(blockEntity.getColor().getId());
+        ResourceLocation resourceLocation = new ResourceLocation(OmorBasketMod.MOD_ID,"textures/block/picnic_basket_base.png");
         poseStack.pushPose();
         poseStack.translate(0.5F, 0.5F, 0.5F);
         poseStack.mulPose(Axis.YP.rotationDegrees(-g));
@@ -76,8 +76,11 @@ public class PicnicBasketRenderer implements BlockEntityRenderer<BasketBlockEnti
         openNess = 1.0F - openNess * openNess * openNess;
         VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(resourceLocation));
         this.render(poseStack, vertexConsumer, this.lid, this.bottom, openNess, i, j);
+        this.lid.render(poseStack,multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(MATERIALS.get(blockEntity.getColor().getId()))),i,j);
+        this.bottom.render(poseStack,multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(MATERIALS.get(blockEntity.getColor().getId()))),i,j);
         poseStack.popPose();
     }
+
 
     private void render(PoseStack poseStack, VertexConsumer vertexConsumer, ModelPart modelPart, ModelPart modelPart2, float f, int i, int j) {
         modelPart.xRot = -(f * 1.5707964F);

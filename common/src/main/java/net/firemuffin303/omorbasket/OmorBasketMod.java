@@ -30,7 +30,7 @@ public class OmorBasketMod {
     }
 
     public static void initVillagerStructures(MinecraftServer server){
-        addToStructurePool(server,new ResourceLocation("minecraft","village/plains/houses"),new ResourceLocation(OmorBasketMod.MOD_ID, "village/plains/picnic"),2);
+        addToStructurePool(server,new ResourceLocation("minecraft","village/plains/houses"),new ResourceLocation(OmorBasketMod.MOD_ID, "village/plains/picnic"),1);
     }
 
     //Learned how it worked from Farmer's Delight Fabric
