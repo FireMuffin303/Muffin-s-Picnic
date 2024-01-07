@@ -30,12 +30,14 @@ public class OmorBasketMod {
     }
 
     public static void initVillagerStructures(MinecraftServer server){
-        addToStructurePool(server,new ResourceLocation("minecraft","village/plains/houses"),new ResourceLocation(OmorBasketMod.MOD_ID, "village/plains/picnic"),1);
+        addToStructurePool(server,new ResourceLocation("minecraft","village/plains/houses"),
+                new ResourceLocation(OmorBasketMod.MOD_ID, "village/plains/picnic"),1);
     }
 
     //Learned how it worked from Farmer's Delight Fabric
     public static void addToStructurePool(MinecraftServer server, ResourceLocation poolIdentifier, ResourceLocation nbtIdentifier, int weight) {
-        Holder<StructureProcessorList> emptyProcessList = server.registryAccess().registryOrThrow(Registries.PROCESSOR_LIST).getHolderOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation("minecraft", "empty")));
+        Holder<StructureProcessorList> emptyProcessList = server.registryAccess().registryOrThrow(Registries.PROCESSOR_LIST)
+                .getHolderOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation("minecraft", "empty")));
         Registry<StructureTemplatePool> structureTemplatePools = server.registryAccess().registry(Registries.TEMPLATE_POOL).orElseThrow();
 
         StructureTemplatePool structure = structureTemplatePools.get(poolIdentifier);
@@ -44,7 +46,8 @@ public class OmorBasketMod {
             return;
         }
 
-        SinglePoolElement singlePoolElement = StructurePoolElement.legacy(nbtIdentifier.toString(),emptyProcessList).apply(StructureTemplatePool.Projection.RIGID);
+        SinglePoolElement singlePoolElement = StructurePoolElement.legacy(nbtIdentifier.toString(),emptyProcessList)
+                .apply(StructureTemplatePool.Projection.RIGID);
 
         List<Pair<StructurePoolElement,Integer>> elements = new ArrayList<>(((StructurePoolAccessorMixin)structure).getRawTemplates());
         elements.add(Pair.of(singlePoolElement,weight));

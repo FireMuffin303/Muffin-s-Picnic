@@ -31,6 +31,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Stream;
 
 public class PicnicBasketRenderer implements BlockEntityRenderer<BasketBlockEntity> {
@@ -76,8 +77,15 @@ public class PicnicBasketRenderer implements BlockEntityRenderer<BasketBlockEnti
         openNess = 1.0F - openNess * openNess * openNess;
         VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(resourceLocation));
         this.render(poseStack, vertexConsumer, this.lid, this.bottom, openNess, i, j);
-        this.lid.render(poseStack,multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(MATERIALS.get(blockEntity.getColor().getId()))),i,j);
-        this.bottom.render(poseStack,multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(MATERIALS.get(blockEntity.getColor().getId()))),i,j);
+
+        ResourceLocation colorOverlay = MATERIALS.get(blockEntity.getColor().getId());
+
+        if(blockEntity.getColor().equals(DyeColor.BLACK) & blockEntity.getName().getString().toLowerCase(Locale.ROOT).equals("something")){
+            colorOverlay = new ResourceLocation(OmorBasketMod.MOD_ID,"textures/block/picnic_basket/something.png");
+        }
+
+        this.lid.render(poseStack,multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(colorOverlay)),i,j);
+        this.bottom.render(poseStack,multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(colorOverlay)),i,j);
         poseStack.popPose();
     }
 
