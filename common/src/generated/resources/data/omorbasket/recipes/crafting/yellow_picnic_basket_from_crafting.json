@@ -6,7 +6,7 @@
       "tag": "minecraft:wooden_slabs"
     },
     "B": {
-      "item": "minecraft:white_carpet"
+      "item": "minecraft:yellow_carpet"
     }
   },
   "pattern": [
@@ -14,7 +14,7 @@
     "AAA"
   ],
   "result": {
-    "item": "omorbasket:white_picnic_basket"
+    "item": "omorbasket:yellow_picnic_basket"
   },
   "show_notification": true
 }

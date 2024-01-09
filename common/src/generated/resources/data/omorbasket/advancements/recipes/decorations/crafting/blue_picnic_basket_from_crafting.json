@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_spruce_slab": {
+    "has_blue_carpet": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:spruce_slab"
+              "minecraft:blue_carpet"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crafting/red_picnic_basket_from_crafting"
+        "recipe": "minecraft:crafting/blue_picnic_basket_from_crafting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_spruce_slab",
+      "has_blue_carpet",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crafting/red_picnic_basket_from_crafting"
+      "minecraft:crafting/blue_picnic_basket_from_crafting"
     ]
   },
   "sends_telemetry_event": false
