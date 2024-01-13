@@ -3,19 +3,22 @@ package net.firemuffin303.fabric.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.omorbasket.OmorBasketMod;
+import net.firemuffin303.omorbasket.common.block.BasketBlock;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
+import net.firemuffin303.omorbasket.common.registry.ModItems;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
 import net.minecraft.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.data.models.blockstates.Variant;
 import net.minecraft.data.models.blockstates.VariantProperties;
-import net.minecraft.data.models.model.ModelTemplate;
-import net.minecraft.data.models.model.TextureSlot;
+import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.Optional;
 
 public class ModelDataGen extends FabricModelProvider {
+    private final ModelTemplate PICNIC_BASKET_INVENTORY = new ModelTemplate(Optional.of(new ResourceLocation(OmorBasketMod.MOD_ID, "item/picnic_basket_template")), Optional.empty(), TextureSlot.TEXTURE);
 
     public ModelDataGen(FabricDataOutput output) {
         super(output);
@@ -23,10 +26,30 @@ public class ModelDataGen extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
-        ModBlocks.PICNIC.forEach((block) -> {
-            blockStateModelGenerator.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block,Variant.variant().with(VariantProperties.MODEL,new ResourceLocation("omorbasket","block/picnic_basket")))
-                    .with(BlockModelGenerators.createHorizontalFacingDispatch()));
+        ModBlocks.PICNIC.forEach((block) ->{
+            BasketBlock basketBlock = (BasketBlock) block;
+            PICNIC_BASKET_INVENTORY.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.defaultTexture(new ResourceLocation(OmorBasketMod.MOD_ID,"block/picnic_basket/"+basketBlock.getColor().getName())), blockStateModelGenerator.modelOutput);
         });
+
+        blockStateModelGenerator.blockEntityModels(new ResourceLocation(OmorBasketMod.MOD_ID,"block/picnic_basket"), Blocks.SPRUCE_PLANKS)
+                .createWithoutBlockItem(
+                        ModBlocks.WHITE_PICNIC_BASKET,
+                        ModBlocks.LIGHT_GRAY_PICNIC_BASKET,
+                        ModBlocks.GRAY_PICNIC_BASKET,
+                        ModBlocks.BLACK_PICNIC_BASKET,
+                        ModBlocks.BROWN_PICNIC_BASKET,
+                        ModBlocks.RED_PICNIC_BASKET,
+                        ModBlocks.ORANGE_PICNIC_BASKET,
+                        ModBlocks.YELLOW_PICNIC_BASKET,
+                        ModBlocks.LIME_PICNIC_BASKET,
+                        ModBlocks.GREEN_PICNIC_BASKET,
+                        ModBlocks.LIGHT_BLUE_PICNIC_BASKET,
+                        ModBlocks.BLUE_PICNIC_BASKET,
+                        ModBlocks.CYAN_PICNIC_BASKET,
+                        ModBlocks.PURPLE_PICNIC_BASKET,
+                        ModBlocks.MAGENTA_PICNIC_BASKET,
+                        ModBlocks.PINK_PICNIC_BASKET);
+
     }
 
     @Override

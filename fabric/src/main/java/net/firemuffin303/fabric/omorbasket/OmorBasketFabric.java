@@ -1,12 +1,10 @@
 package net.firemuffin303.fabric.omorbasket;
 
+import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.firemuffin303.omorbasket.OmorBasketMod;
-import net.fabricmc.api.ModInitializer;
-import net.firemuffin303.omorbasket.common.registry.ModBlocks;
 import net.firemuffin303.omorbasket.common.registry.ModItems;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,3 +1,6 @@
 {
-  "parent": "omorbasket:block/light_gray_picnic_basket"
+  "parent": "omorbasket:item/picnic_basket_template",
+  "textures": {
+    "texture": "omorbasket:block/picnic_basket/light_gray"
+  }
 }

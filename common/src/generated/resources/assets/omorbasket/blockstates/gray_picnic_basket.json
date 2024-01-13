@@ -1,19 +1,7 @@
 {
   "variants": {
-    "facing=east": {
-      "model": "omorbasket:block/picnic_basket",
-      "y": 90
-    },
-    "facing=north": {
+    "": {
       "model": "omorbasket:block/picnic_basket"
-    },
-    "facing=south": {
-      "model": "omorbasket:block/picnic_basket",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "omorbasket:block/picnic_basket",
-      "y": 270
     }
   }
 }

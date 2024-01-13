@@ -1,15 +1,15 @@
 package net.firemuffin303.omorbasket.client.renderer;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.authlib.minecraft.client.MinecraftClient;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import net.firemuffin303.omorbasket.OmorBasketMod;
 import net.firemuffin303.omorbasket.common.block.BasketBlock;
 import net.firemuffin303.omorbasket.common.block.entity.BasketBlockEntity;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -20,16 +20,11 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.entity.LidBlockEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Stream;
@@ -67,7 +62,12 @@ public class PicnicBasketRenderer implements BlockEntityRenderer<BasketBlockEnti
             }
         }
 
-        ResourceLocation resourceLocation = new ResourceLocation(OmorBasketMod.MOD_ID,"textures/block/picnic_basket_base.png");
+        ResourceLocation resourceLocation = MATERIALS.get(blockEntity.getColor().getId());
+
+        if(blockEntity.getColor().equals(DyeColor.BLACK) & blockEntity.getName().getString().toLowerCase(Locale.ROOT).equals("something")){
+            resourceLocation = new ResourceLocation(OmorBasketMod.MOD_ID,"textures/block/picnic_basket/something.png");
+        }
+
         poseStack.pushPose();
         poseStack.translate(0.5F, 0.5F, 0.5F);
         poseStack.mulPose(Axis.YP.rotationDegrees(-g));
@@ -78,14 +78,15 @@ public class PicnicBasketRenderer implements BlockEntityRenderer<BasketBlockEnti
         VertexConsumer vertexConsumer = multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(resourceLocation));
         this.render(poseStack, vertexConsumer, this.lid, this.bottom, openNess, i, j);
 
-        ResourceLocation colorOverlay = MATERIALS.get(blockEntity.getColor().getId());
+       //ResourceLocation colorOverlay = MATERIALS.get(blockEntity.getColor().getId());
 
-        if(blockEntity.getColor().equals(DyeColor.BLACK) & blockEntity.getName().getString().toLowerCase(Locale.ROOT).equals("something")){
-            colorOverlay = new ResourceLocation(OmorBasketMod.MOD_ID,"textures/block/picnic_basket/something.png");
-        }
+       //if(blockEntity.getColor().equals(DyeColor.BLACK) & blockEntity.getName().getString().toLowerCase(Locale.ROOT).equals("something")){
+       //    colorOverlay = new ResourceLocation(OmorBasketMod.MOD_ID,"textures/block/picnic_basket/something.png");
+       //}
 
-        this.lid.render(poseStack,multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(colorOverlay)),i,j);
-        this.bottom.render(poseStack,multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(colorOverlay)),i,j);
+
+        //this.lid.render(poseStack,multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(colorOverlay)),i,j);
+        //this.bottom.render(poseStack,multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(colorOverlay)),i,j);
         poseStack.popPose();
     }
 
@@ -96,6 +97,16 @@ public class PicnicBasketRenderer implements BlockEntityRenderer<BasketBlockEnti
         modelPart2.render(poseStack, vertexConsumer, i, j);
 
     }
+
+    public ModelPart getLid() {
+        return this.lid;
+    }
+
+    public ModelPart getBottom() {
+        return this.bottom;
+    }
+
+
 
     static {
         MATERIALS = Stream.of(DyeColor.values()).map((dyeColor) -> {
