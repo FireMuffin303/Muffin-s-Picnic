@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "B": {
+      "item": "minecraft:blue_carpet"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "item": "muffins_picnic:blue_picnic_basket"
+  },
+  "show_notification": true
+}

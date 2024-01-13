@@ -1,10 +1,9 @@
 package net.firemuffin303.omorbasket.common.block.entity;
 
-import net.firemuffin303.omorbasket.OmorBasketMod;
+import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.common.block.BasketBlock;
 import net.firemuffin303.omorbasket.common.menu.PicnicBasketMenu;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
-import net.firemuffin303.omorbasket.common.registry.ModMenuType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -20,14 +19,12 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
 public class BasketBlockEntity extends RandomizableContainerBlockEntity implements LidBlockEntity {
     private NonNullList<ItemStack> items;
@@ -86,7 +83,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 
     @Override
     protected Component getDefaultName() {
-        return Component.translatable(OmorBasketMod.MOD_ID + ".container.basket");
+        return Component.translatable(PicnicMod.MOD_ID + ".container.basket");
     }
 
     @Override

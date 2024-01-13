@@ -2,15 +2,11 @@ package net.firemuffin303.fabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.firemuffin303.omorbasket.OmorBasketMod;
+import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.common.block.BasketBlock;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
-import net.firemuffin303.omorbasket.common.registry.ModItems;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.ItemModelGenerators;
-import net.minecraft.data.models.blockstates.MultiVariantGenerator;
-import net.minecraft.data.models.blockstates.Variant;
-import net.minecraft.data.models.blockstates.VariantProperties;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -18,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import java.util.Optional;
 
 public class ModelDataGen extends FabricModelProvider {
-    private final ModelTemplate PICNIC_BASKET_INVENTORY = new ModelTemplate(Optional.of(new ResourceLocation(OmorBasketMod.MOD_ID, "item/picnic_basket_template")), Optional.empty(), TextureSlot.TEXTURE);
+    private final ModelTemplate PICNIC_BASKET_INVENTORY = new ModelTemplate(Optional.of(new ResourceLocation(PicnicMod.MOD_ID, "item/picnic_basket_template")), Optional.empty(), TextureSlot.TEXTURE);
 
     public ModelDataGen(FabricDataOutput output) {
         super(output);
@@ -28,10 +24,10 @@ public class ModelDataGen extends FabricModelProvider {
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
         ModBlocks.PICNIC.forEach((block) ->{
             BasketBlock basketBlock = (BasketBlock) block;
-            PICNIC_BASKET_INVENTORY.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.defaultTexture(new ResourceLocation(OmorBasketMod.MOD_ID,"block/picnic_basket/"+basketBlock.getColor().getName())), blockStateModelGenerator.modelOutput);
+            PICNIC_BASKET_INVENTORY.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.defaultTexture(new ResourceLocation(PicnicMod.MOD_ID,"block/picnic_basket/"+basketBlock.getColor().getName())), blockStateModelGenerator.modelOutput);
         });
 
-        blockStateModelGenerator.blockEntityModels(new ResourceLocation(OmorBasketMod.MOD_ID,"block/picnic_basket"), Blocks.SPRUCE_PLANKS)
+        blockStateModelGenerator.blockEntityModels(new ResourceLocation(PicnicMod.MOD_ID,"block/picnic_basket"), Blocks.SPRUCE_PLANKS)
                 .createWithoutBlockItem(
                         ModBlocks.WHITE_PICNIC_BASKET,
                         ModBlocks.LIGHT_GRAY_PICNIC_BASKET,
@@ -57,6 +53,6 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     private static ModelTemplate createModBlock(String string, TextureSlot... textureSlots) {
-        return new ModelTemplate(Optional.of(new ResourceLocation(OmorBasketMod.MOD_ID, "block/" + string)),Optional.empty(), textureSlots);
+        return new ModelTemplate(Optional.of(new ResourceLocation(PicnicMod.MOD_ID, "block/" + string)),Optional.empty(), textureSlots);
     }
 }

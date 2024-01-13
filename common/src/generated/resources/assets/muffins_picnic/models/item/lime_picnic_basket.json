@@ -1,0 +1,6 @@
+{
+  "parent": "muffins_picnic:item/picnic_basket_template",
+  "textures": {
+    "texture": "muffins_picnic:block/picnic_basket/lime"
+  }
+}

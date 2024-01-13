@@ -1,26 +1,26 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
 #issueTrackerURL = ""
-license = "Insert License Here"
+license = "MIT License"
 
 [[mods]]
-modId = "omorbasket"
+modId = "muffins_picnic"
 version = "${version}"
-displayName = "Omor Basket"
+displayName = "Muffin's Picnic"
 authors = "FireMuffin303!"
 description = '''
 This is an example description! Tell everyone what your mod is about!
 '''
 #logoFile = ""
 
-[[dependencies.omorbasket]]
+[[dependencies.muffins_picnic]]
 modId = "forge"
 mandatory = true
 versionRange = "[47,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.omorbasket]]
+[[dependencies.muffins_picnic]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.20.1,)"

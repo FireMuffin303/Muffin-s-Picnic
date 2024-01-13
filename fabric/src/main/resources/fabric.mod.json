@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "omorbasket",
+  "id": "muffins_picnic",
   "version": "${version}",
-  "name": "Omor Basket",
+  "name": "Muffin's Picnic",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
     "FireMuffin303"
@@ -27,8 +27,8 @@
     ]
   },
   "mixins": [
-    "omorbasket.mixins.json",
-    "omorbasket-common.mixins.json"
+    "muffins_picnic.mixins.json",
+    "muffins_picnic-common.mixins.json"
   ],
   "depends": {
     "fabric": "*",

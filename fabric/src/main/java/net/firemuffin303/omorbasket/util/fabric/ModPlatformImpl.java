@@ -3,14 +3,11 @@ package net.firemuffin303.omorbasket.util.fabric;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
-import net.fabricmc.fabric.impl.client.rendering.BlockEntityRendererRegistryImpl;
-import net.firemuffin303.omorbasket.OmorBasketMod;
+import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.util.ModPlatform;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.Registry;
@@ -34,13 +31,13 @@ import java.util.function.Supplier;
 
 public class ModPlatformImpl {
     public static <T extends Block> Supplier<T> registryBlock(String id, Supplier<T> block) {
-        Registry.register(BuiltInRegistries.BLOCK,new ResourceLocation(OmorBasketMod.MOD_ID,id),block.get());
+        Registry.register(BuiltInRegistries.BLOCK,new ResourceLocation(PicnicMod.MOD_ID,id),block.get());
         return block;
     }
 
 
     public static <T extends Item> Supplier<T> registryItem(String id, Supplier<T> item) {
-        Registry.register(BuiltInRegistries.ITEM,new ResourceLocation(OmorBasketMod.MOD_ID,id),item.get());
+        Registry.register(BuiltInRegistries.ITEM,new ResourceLocation(PicnicMod.MOD_ID,id),item.get());
         return item;
     }
 
@@ -55,12 +52,12 @@ public class ModPlatformImpl {
 
     public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id,ModPlatform.BlockEntitySupplier<T> blockEntityTypeSupplier,Block... block) {
         BlockEntityType<T> blockEntityType = BlockEntityType.Builder.of(blockEntityTypeSupplier::create,block).build(null);
-        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,new ResourceLocation(OmorBasketMod.MOD_ID,id),blockEntityType);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,new ResourceLocation(PicnicMod.MOD_ID,id),blockEntityType);
         return blockEntityType;
     }
 
     public static <T extends AbstractContainerMenu> MenuType<T> registryMenu(String id, ModPlatform.MenuSupplier<T> menu) {
-        return Registry.register(BuiltInRegistries.MENU,new ResourceLocation(OmorBasketMod.MOD_ID,id),new MenuType(menu::create, FeatureFlags.VANILLA_SET));
+        return Registry.register(BuiltInRegistries.MENU,new ResourceLocation(PicnicMod.MOD_ID,id),new MenuType(menu::create, FeatureFlags.VANILLA_SET));
     }
 
     public static <M extends AbstractContainerMenu,U extends Screen & MenuAccess<M>> void registerScreen(MenuType<M> menuType, ModPlatform.ScreenConstructor<M, U> screen) {

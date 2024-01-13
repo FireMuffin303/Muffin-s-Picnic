@@ -1,6 +1,0 @@
-{
-  "parent": "omorbasket:item/picnic_basket_template",
-  "textures": {
-    "texture": "omorbasket:block/picnic_basket/orange"
-  }
-}

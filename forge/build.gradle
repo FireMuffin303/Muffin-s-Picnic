@@ -14,8 +14,8 @@ loom {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
 
-        mixinConfig "omorbasket-common.mixins.json"
-        mixinConfig "examplemod.mixins.json"
+        mixinConfig "muffins_picnic-common.mixins.json"
+        mixinConfig "muffins_picnic.mixins.json"
     }
 }
 

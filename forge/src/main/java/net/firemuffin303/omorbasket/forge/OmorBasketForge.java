@@ -1,6 +1,6 @@
 package net.firemuffin303.omorbasket.forge;
 
-import net.firemuffin303.omorbasket.OmorBasketMod;
+import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
 import net.firemuffin303.omorbasket.common.registry.ModItems;
 import net.firemuffin303.omorbasket.common.registry.ModMenuType;
@@ -20,12 +20,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 
-@Mod(OmorBasketMod.MOD_ID)
+@Mod(PicnicMod.MOD_ID)
 public class OmorBasketForge {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES,OmorBasketMod.MOD_ID);
-    public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(ForgeRegistries.MENU_TYPES,OmorBasketMod.MOD_ID);
-    public static final DeferredRegister<Block> BLOCK = DeferredRegister.create(ForgeRegistries.BLOCKS,OmorBasketMod.MOD_ID);
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,OmorBasketMod.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, PicnicMod.MOD_ID);
+    public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(ForgeRegistries.MENU_TYPES, PicnicMod.MOD_ID);
+    public static final DeferredRegister<Block> BLOCK = DeferredRegister.create(ForgeRegistries.BLOCKS, PicnicMod.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PicnicMod.MOD_ID);
 
     public OmorBasketForge() {
         // Submit our event bus to let architectury register our content on the right time
