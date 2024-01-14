@@ -3,16 +3,17 @@
   "id": "muffins_picnic",
   "version": "${version}",
   "name": "Muffin's Picnic",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Add Picnic Basket to carry items and hangout!!",
   "authors": [
     "FireMuffin303"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://modrinth.com/project/muffins-picnic",
+    "sources": "https://github.com/FireMuffin303/Muffin-s-Picnic",
+    "issues": "https://github.com/FireMuffin303/Muffin-s-Picnic/issues"
   },
-  "license": "Insert License Here",
-  "icon": "assets/examplemod/icon.png",
+  "license": "MIT License",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [

@@ -1,6 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "[47,)"
-#issueTrackerURL = ""
+issueTrackerURL = "https://github.com/FireMuffin303/Muffin-s-Picnic/issues"
 license = "MIT License"
 
 [[mods]]
@@ -9,9 +9,9 @@ version = "${version}"
 displayName = "Muffin's Picnic"
 authors = "FireMuffin303!"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Add Picnic Basket to carry items and hangout!
 '''
-#logoFile = ""
+logoFile = "icon.png"
 
 [[dependencies.muffins_picnic]]
 modId = "forge"
