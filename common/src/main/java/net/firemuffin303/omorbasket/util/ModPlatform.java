@@ -45,6 +45,11 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
+    public static ResourceLocation registryCustomStat(String id){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
     public static <M extends AbstractContainerMenu,U extends Screen & MenuAccess<M>> void registerScreen(MenuType<M> menuType, ScreenConstructor<M,U> screen){
         throw new NotImplementedException();
     }

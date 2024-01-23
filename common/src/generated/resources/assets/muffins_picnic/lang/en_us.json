@@ -15,5 +15,6 @@
   "block.muffins_picnic.red_picnic_basket": "Red Picnic Basket",
   "block.muffins_picnic.white_picnic_basket": "White Picnic Basket",
   "block.muffins_picnic.yellow_picnic_basket": "Yellow Picnic Basket",
-  "muffins_picnic.container.basket": "Picnic Basket"
+  "muffins_picnic.container.basket": "Picnic Basket",
+  "stat.muffins_picnic.open_picnic_basket": "Picnic Basket Opened"
 }

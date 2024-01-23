@@ -15,5 +15,6 @@
   "block.muffins_picnic.red_picnic_basket": "ตะกร้าปิกนิกสีแดง",
   "block.muffins_picnic.white_picnic_basket": "ตะกร้าปิกนิกสีขาว",
   "block.muffins_picnic.yellow_picnic_basket": "ตะกร้าปิกนิกสีเหลือง",
-  "muffins_picnic.container.basket": "ตะกร้าปิกนิก"
+  "muffins_picnic.container.basket": "ตะกร้าปิกนิก",
+  "stat.muffins_picnic.open_picnic_basket": "เปิดตะกร้าปิคนิค"
 }

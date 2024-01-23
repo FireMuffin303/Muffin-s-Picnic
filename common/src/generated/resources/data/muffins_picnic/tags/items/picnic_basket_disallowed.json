@@ -17,6 +17,7 @@
     "muffins_picnic:purple_picnic_basket",
     "muffins_picnic:magenta_picnic_basket",
     "muffins_picnic:pink_picnic_basket",
-    "create:toolboxes"
+    "create:toolboxes",
+    "supplementaries:sack"
   ]
 }

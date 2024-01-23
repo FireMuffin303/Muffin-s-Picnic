@@ -3,6 +3,7 @@ package net.firemuffin303.fabric.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.firemuffin303.omorbasket.common.registry.ModItems;
+import net.firemuffin303.omorbasket.common.registry.ModStat;
 
 public class LangDataGen extends FabricLanguageProvider {
     protected LangDataGen(FabricDataOutput dataOutput) {
@@ -28,6 +29,7 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.PURPLE_PICNIC_BASKET,"Purple Picnic Basket");
         translationBuilder.add(ModItems.MAGENTA_PICNIC_BASKET,"Magenta Picnic Basket");
         translationBuilder.add(ModItems.PINK_PICNIC_BASKET,"Pink Picnic Basket");
+        translationBuilder.add("stat.muffins_picnic.open_picnic_basket","Picnic Basket Opened");
 
     }
 
@@ -55,6 +57,7 @@ public class LangDataGen extends FabricLanguageProvider {
             translationBuilder.add(ModItems.PURPLE_PICNIC_BASKET,"ตะกร้าปิกนิกสีม่วง");
             translationBuilder.add(ModItems.MAGENTA_PICNIC_BASKET,"ตะกร้าปิกนิกสีบานเย็น");
             translationBuilder.add(ModItems.PINK_PICNIC_BASKET,"ตะกร้าปิกนิกสีชมพู");
+            translationBuilder.add("stat.muffins_picnic.open_picnic_basket","เปิดตะกร้าปิคนิค");
         }
     }
 }

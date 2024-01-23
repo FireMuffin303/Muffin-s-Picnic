@@ -14,6 +14,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.stats.StatFormatter;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
@@ -70,6 +72,13 @@ public class ModPlatformImpl {
 
     public static <E extends BlockEntity> void registerBlockEntityRenderer(BlockEntityType<E> blockEntityType, BlockEntityRendererProvider<? super E> blockEntityRendererFactory){
         BlockEntityRendererRegistry.register(blockEntityType,blockEntityRendererFactory);
+    }
+
+    public static ResourceLocation registryCustomStat(String id) {
+        ResourceLocation resourceLocation = new ResourceLocation(PicnicMod.MOD_ID,id);
+        Registry.register(BuiltInRegistries.CUSTOM_STAT,id,resourceLocation);
+        Stats.CUSTOM.get(resourceLocation, StatFormatter.DEFAULT);
+        return resourceLocation;
     }
 
 }

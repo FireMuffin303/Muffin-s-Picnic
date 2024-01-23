@@ -2,6 +2,7 @@ package net.firemuffin303.omorbasket.common.block;
 
 import net.firemuffin303.omorbasket.common.block.entity.BasketBlockEntity;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
+import net.firemuffin303.omorbasket.common.registry.ModStat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -65,7 +66,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
             if (blockEntity instanceof BasketBlockEntity) {
                 player.openMenu((BasketBlockEntity)blockEntity);
-                player.awardStat(Stats.OPEN_BARREL);
+                player.awardStat(ModStat.OPEN_PICNIC_BASKET);
                 PiglinAi.angerNearbyPiglins(player, true);
             }
 

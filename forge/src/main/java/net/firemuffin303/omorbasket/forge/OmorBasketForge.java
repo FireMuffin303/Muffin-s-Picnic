@@ -4,7 +4,10 @@ import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
 import net.firemuffin303.omorbasket.common.registry.ModItems;
 import net.firemuffin303.omorbasket.common.registry.ModMenuType;
+import net.firemuffin303.omorbasket.common.registry.ModStat;
 import net.firemuffin303.omorbasket.forge.structure.VillageStructures;
+import net.minecraft.stats.StatFormatter;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -15,6 +18,7 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -39,6 +43,7 @@ public class OmorBasketForge {
 
         modEventBus.addListener(EventPriority.HIGH,this::registerEvent);
         modEventBus.addListener(EventPriority.HIGH,this::registerCreativeTabModify);
+        modEventBus.addListener(EventPriority.HIGH,this::commonSetup);
         MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
     }
 
@@ -54,6 +59,10 @@ public class OmorBasketForge {
         registerEvent.register(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES,helper -> ModBlocks.ModBlockEntityTypes.init());
         registerEvent.register(ForgeRegistries.Keys.BLOCKS,helper -> ModBlocks.init());
         registerEvent.register(ForgeRegistries.Keys.ITEMS,helper -> ModItems.init());
+    }
+
+    private void commonSetup(FMLCommonSetupEvent event){
+        event.enqueueWork(ModStat::init);
     }
 
 

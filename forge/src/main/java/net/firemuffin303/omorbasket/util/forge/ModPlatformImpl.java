@@ -1,5 +1,7 @@
 package net.firemuffin303.omorbasket.util.forge;
 
+import net.firemuffin303.omorbasket.PicnicMod;
+import net.firemuffin303.omorbasket.common.registry.ModStat;
 import net.firemuffin303.omorbasket.forge.OmorBasketForge;
 import net.firemuffin303.omorbasket.util.ModPlatform;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -13,6 +15,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.stats.StatFormatter;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
@@ -63,6 +67,13 @@ public class ModPlatformImpl {
 
     public static <T extends Entity> void registerEntityRenderer(EntityType<T> entityTypeSupplier, EntityRendererProvider<T> entityRendererProvider) {
         EntityRenderers.register(entityTypeSupplier, entityRendererProvider);
+    }
+
+    public static ResourceLocation registryCustomStat(String id) {
+        ResourceLocation resourceLocation = new ResourceLocation(PicnicMod.MOD_ID,id);
+        Registry.register(BuiltInRegistries.CUSTOM_STAT,id,resourceLocation);
+        Stats.CUSTOM.get(resourceLocation, StatFormatter.DEFAULT);
+        return resourceLocation;
     }
 
 }
