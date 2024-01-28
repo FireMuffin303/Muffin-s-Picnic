@@ -7,11 +7,15 @@
     },
     "B": {
       "item": "minecraft:red_carpet"
+    },
+    "C": {
+      "tag": "minecraft:planks"
     }
   },
   "pattern": [
-    "ABA",
-    "AAA"
+    "AAA",
+    "CBC",
+    "CCC"
   ],
   "result": {
     "item": "muffins_picnic:red_picnic_basket"

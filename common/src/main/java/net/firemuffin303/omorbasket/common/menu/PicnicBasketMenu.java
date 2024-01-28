@@ -91,7 +91,10 @@ public class PicnicBasketMenu extends AbstractContainerMenu {
 
         @Override
         public boolean mayPlace(ItemStack itemStack) {
-            return itemStack.getItem().canFitInsideContainerItems() && !itemStack.is(ModItemTags.PICNIC_BASKET_DISALLOWED);
+            if(itemStack.is(ModItemTags.PICNIC_BASKET_DISALLOWED)){
+                return false;
+            }
+            return itemStack.getItem().canFitInsideContainerItems();
         }
     }
 }

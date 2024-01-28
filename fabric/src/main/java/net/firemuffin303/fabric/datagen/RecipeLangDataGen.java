@@ -43,8 +43,10 @@ public class RecipeLangDataGen extends FabricRecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,result,1)
                 .define('A',ItemTags.WOODEN_SLABS)
                 .define('B',carpet)
-                .pattern("ABA")
+                .define('C',ItemTags.PLANKS)
                 .pattern("AAA")
+                .pattern("CBC")
+                .pattern("CCC")
                 .unlockedBy(getHasName(carpet),has(carpet))
                 .save(consumer, "crafting/"+getItemName(result)+"_from_crafting");
     }
