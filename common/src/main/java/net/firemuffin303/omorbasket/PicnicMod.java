@@ -9,6 +9,9 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
@@ -19,6 +22,7 @@ import java.util.List;
 
 public class PicnicMod {
     public static final String MOD_ID = "muffins_picnic";
+
 
     public static void init() {
         ModMenuType.init();
@@ -32,6 +36,7 @@ public class PicnicMod {
     public static void initVillagerStructures(MinecraftServer server){
         addToStructurePool(server,new ResourceLocation("minecraft","village/plains/houses"),
                 new ResourceLocation(PicnicMod.MOD_ID, "village/plains/picnic"),1);
+
     }
 
     //Learned how it worked from Farmer's Delight Fabric

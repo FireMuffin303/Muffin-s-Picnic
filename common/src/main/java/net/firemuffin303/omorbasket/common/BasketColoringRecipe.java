@@ -14,7 +14,6 @@ import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ShulkerBoxBlock;
 
 public class BasketColoringRecipe extends CustomRecipe {
     public BasketColoringRecipe(ResourceLocation resourceLocation, CraftingBookCategory craftingBookCategory) {

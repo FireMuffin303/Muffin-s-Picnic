@@ -1,6 +1,7 @@
 package net.firemuffin303.omorbasket.util;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.firemuffin303.omorbasket.PicnicMod;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -21,6 +22,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -64,6 +67,11 @@ public class ModPlatform {
 
     @ExpectPlatform
     public static <T extends Recipe<?>> Supplier<RecipeSerializer<T>> registerRecipeSerializer(String id, Supplier<RecipeSerializer<T>> recipeSerializer){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static PicnicMod.PicnicAllowance getPicnicAllowance(Level level){
         throw new AssertionError();
     }
 

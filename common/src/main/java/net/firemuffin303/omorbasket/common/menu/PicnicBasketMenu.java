@@ -1,7 +1,10 @@
 package net.firemuffin303.omorbasket.common.menu;
 
+import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.common.registry.ModItemTags;
 import net.firemuffin303.omorbasket.common.registry.ModMenuType;
+import net.firemuffin303.omorbasket.util.ModPlatform;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -10,6 +13,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class PicnicBasketMenu extends AbstractContainerMenu {
     private static final int CONTAINER_SIZE = 9;
@@ -27,7 +31,7 @@ public class PicnicBasketMenu extends AbstractContainerMenu {
 
         for(int j = 0; j < 3; ++j) {
             for(int k = 0; k < 3; ++k) {
-                this.addSlot(new PicnicBasketSlot(container, k + j * 3, 62 + k * 18, 17 + j * 18));
+                this.addSlot(new PicnicBasketSlot(container, k + j * 3, 62 + k * 18, 17 + j * 18,inventory.player.level()));
             }
         }
 
@@ -84,17 +88,27 @@ public class PicnicBasketMenu extends AbstractContainerMenu {
     }
 
     private static class PicnicBasketSlot extends Slot{
-
-        public PicnicBasketSlot(Container container, int i, int j, int k) {
+        private Level level;
+        public PicnicBasketSlot(Container container, int i, int j, int k,Level level) {
             super(container, i, j, k);
+            this.level = level;
         }
 
         @Override
         public boolean mayPlace(ItemStack itemStack) {
-            if(itemStack.is(ModItemTags.PICNIC_BASKET_DISALLOWED)){
-                return false;
+            PicnicMod.PicnicAllowance picnicAllowance = ModPlatform.getPicnicAllowance(level);
+            if(picnicAllowance == PicnicMod.PicnicAllowance.NOT_BLACKLIST){
+                if(itemStack.is(ModItemTags.PICNIC_BASKET_BLACKLIST)){
+                    return false;
+                }
+                return itemStack.getItem().canFitInsideContainerItems();
+            }else if(picnicAllowance == PicnicMod.PicnicAllowance.ONLY_FOOD){
+                return itemStack.getItem().isEdible() && itemStack.getItem().canFitInsideContainerItems();
+            } else if (picnicAllowance == PicnicMod.PicnicAllowance.ONLY_WHITELIST) {
+                return itemStack.is(ModItemTags.PICNIC_BASKET_WHITELIST) && itemStack.getItem().canFitInsideContainerItems();
             }
-            return itemStack.getItem().canFitInsideContainerItems();
+
+            return false;
         }
     }
 }

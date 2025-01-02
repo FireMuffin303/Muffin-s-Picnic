@@ -28,6 +28,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -81,6 +82,10 @@ public class ModPlatformImpl {
 
     public static <T extends Recipe<?>> Supplier<RecipeSerializer<T>> registerRecipeSerializer(String id, Supplier<RecipeSerializer<T>> recipeSerializer) {
         return OmorBasketForge.RECIPE_SERIALIZERS.register(id,recipeSerializer);
+    }
+
+    public static PicnicMod.PicnicAllowance getPicnicAllowance(Level level) {
+        return PicnicMod.PicnicAllowance.ONLY_FOOD;
     }
 
 }

@@ -5,6 +5,7 @@ import com.mojang.realmsclient.client.Request;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.firemuffin303.fabric.omorbasket.OmorBasketFabric;
 import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.util.ModPlatform;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -31,6 +32,7 @@ import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -91,6 +93,10 @@ public class ModPlatformImpl {
     public static <T extends Recipe<?>> Supplier<RecipeSerializer<T>> registerRecipeSerializer(String id, Supplier<RecipeSerializer<T>> recipeSerializer) {
         RecipeSerializer<T> recipeSerializer1 = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,new ResourceLocation(PicnicMod.MOD_ID,id),recipeSerializer.get());
         return () -> recipeSerializer1;
+    }
+
+    public static PicnicMod.PicnicAllowance getPicnicAllowance(Level level) {
+        return level.getGameRules().getRule(OmorBasketFabric.PICNIC_ALLOWANCE).get();
     }
 
 }

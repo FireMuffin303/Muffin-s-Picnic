@@ -1,2 +1,3 @@
-// 1.20.1	2025-01-02T15:19:50.6054052	Muffin's Picnic/Tags for minecraft:item
-07c1746ba035bb3a870ea099d34f800ebc3c0839 data\muffins_picnic\tags\items\picnic_basket_disallowed.json
+// 1.20.1	2025-01-02T23:30:18.3432602	Muffin's Picnic/Tags for minecraft:item
+88fc8a318d7d0633858b410a8f2306d4cf91a7e5 data\muffins_picnic\tags\items\picnic_basket_whitelist.json
+07c1746ba035bb3a870ea099d34f800ebc3c0839 data\muffins_picnic\tags\items\picnic_basket_blacklist.json

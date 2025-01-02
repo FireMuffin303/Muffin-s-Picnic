@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-02T15:19:50.6028773	Muffin's Picnic/Block Loot Tables
+// 1.20.1	2025-01-02T23:30:18.3407486	Muffin's Picnic/Block Loot Tables
 14793ecddc155ce32e27c9b34f409cbd49332b7c data\muffins_picnic\loot_tables\blocks\green_picnic_basket.json
 fb0746f508d2415a10b13a8a63fdcb2a8cf1b373 data\muffins_picnic\loot_tables\blocks\red_picnic_basket.json
 7a6abaaa6ecf0e6982333c86cd178a902a37fc94 data\muffins_picnic\loot_tables\blocks\magenta_picnic_basket.json
@@ -7,8 +7,8 @@ fb0746f508d2415a10b13a8a63fdcb2a8cf1b373 data\muffins_picnic\loot_tables\blocks\
 3010846a4b6a3a98e208a66c4634f76c1ee05855 data\muffins_picnic\loot_tables\blocks\gray_picnic_basket.json
 62f234be9f9ff4d542e7834d128681e9eece3743 data\muffins_picnic\loot_tables\blocks\orange_picnic_basket.json
 66757dca186a497ce8b676630a92585dd1b64f40 data\muffins_picnic\loot_tables\blocks\blue_picnic_basket.json
-1fd310c783b9ff232361993e4d6100e1813797a7 data\muffins_picnic\loot_tables\blocks\yellow_picnic_basket.json
 b50e7d85cbe67fac638d2db9d8693c641a0c51f8 data\muffins_picnic\loot_tables\blocks\light_blue_picnic_basket.json
+1fd310c783b9ff232361993e4d6100e1813797a7 data\muffins_picnic\loot_tables\blocks\yellow_picnic_basket.json
 10736f82194defa0458080a206e3e383df3f0079 data\muffins_picnic\loot_tables\blocks\pink_picnic_basket.json
 3384dcc0388d5ff0f2f08459d2dc0bf63516ac6a data\muffins_picnic\loot_tables\blocks\white_picnic_basket.json
 943fc1994e8d2f397d46b6b91e55409f1ef189bb data\muffins_picnic\loot_tables\blocks\purple_picnic_basket.json

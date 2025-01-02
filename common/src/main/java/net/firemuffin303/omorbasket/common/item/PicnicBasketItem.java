@@ -41,4 +41,9 @@ public class PicnicBasketItem extends BlockItem {
         var10000.forEach(nonNullList::add);
         return Optional.of(new BasketTooltipComponent(nonNullList));
     }
+
+    @Override
+    public boolean canFitInsideContainerItems() {
+        return false;
+    }
 }

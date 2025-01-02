@@ -9,6 +9,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -21,8 +22,12 @@ public class TagDataGen extends FabricTagProvider.ItemTagProvider{
     @Override
     protected void addTags(HolderLookup.Provider arg) {
         ModItems.PICNIC.forEach((item) ->{
-            getOrCreateTagBuilder(ModItemTags.PICNIC_BASKET_DISALLOWED)
+            getOrCreateTagBuilder(ModItemTags.PICNIC_BASKET_BLACKLIST)
                     .add(item);
+        });
+
+        BuiltInRegistries.ITEM.stream().filter(Item::isEdible).forEach(item -> {
+            getOrCreateTagBuilder(ModItemTags.PICNIC_BASKET_WHITELIST).add(item);
         });
 
         //getOrCreateTagBuilder(ModItemTags.PICNIC_BASKET_DISALLOWED)

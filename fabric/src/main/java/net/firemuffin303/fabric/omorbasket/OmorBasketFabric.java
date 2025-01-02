@@ -33,5 +33,7 @@ public class OmorBasketFabric implements ModInitializer {
             LOGGER.info("initializing village plains structure");
             PicnicMod.initVillagerStructures(server);
                 });
+
+
     }
 }

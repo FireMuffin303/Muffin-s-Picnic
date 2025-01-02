@@ -1,10 +1,7 @@
 package net.firemuffin303.omorbasket.forge;
 
 import net.firemuffin303.omorbasket.PicnicMod;
-import net.firemuffin303.omorbasket.common.registry.ModBlocks;
-import net.firemuffin303.omorbasket.common.registry.ModItems;
-import net.firemuffin303.omorbasket.common.registry.ModMenuType;
-import net.firemuffin303.omorbasket.common.registry.ModStat;
+import net.firemuffin303.omorbasket.common.registry.*;
 import net.firemuffin303.omorbasket.forge.structure.VillageStructures;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -32,6 +29,8 @@ public class OmorBasketForge {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PicnicMod.MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS,PicnicMod.MOD_ID);
 
+    //I hate forge. And I know that once this updated to 1.20.2+, I will free from forge. :D
+    //public static final GameRules.Key<EnumValue<PicnicMod.PicnicAllowance>> PICNIC_ALLOWANCE = GameRules.register(PicnicMod.MOD_ID+":picnicAllowance",GameRules.Category.MISC,new EnumValue<>())
 
     public OmorBasketForge() {
         // Submit our event bus to let architectury register our content on the right time
@@ -62,11 +61,11 @@ public class OmorBasketForge {
         registerEvent.register(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES,helper -> ModBlocks.ModBlockEntityTypes.init());
         registerEvent.register(ForgeRegistries.Keys.BLOCKS,helper -> ModBlocks.init());
         registerEvent.register(ForgeRegistries.Keys.ITEMS,helper -> ModItems.init());
+        registerEvent.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS,helper -> ModRecipeSerializer.init());
     }
 
     private void commonSetup(FMLCommonSetupEvent event){
         event.enqueueWork(ModStat::init);
     }
-
 
 }
