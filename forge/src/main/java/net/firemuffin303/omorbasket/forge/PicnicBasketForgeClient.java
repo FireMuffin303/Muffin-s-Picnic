@@ -1,6 +1,7 @@
 package net.firemuffin303.omorbasket.forge;
 
 import net.firemuffin303.omorbasket.PicnicMod;
+import net.firemuffin303.omorbasket.client.BasketTooltipComponent;
 import net.firemuffin303.omorbasket.client.registry.ModBlockEntityRenderer;
 import net.firemuffin303.omorbasket.client.registry.ModScreens;
 import net.firemuffin303.omorbasket.util.ModPlatform;
@@ -11,6 +12,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
+import net.minecraftforge.client.event.RenderTooltipEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -45,6 +49,11 @@ public class PicnicBasketForgeClient {
                 event.registerBlockEntityRenderer(entityType,blockEntityRendererProvider);
             }
         });
+    }
+
+    @SubscribeEvent
+    public static void registerTooltip(RegisterClientTooltipComponentFactoriesEvent tooltipEvent){
+        tooltipEvent.register(BasketTooltipComponent.class, BasketTooltipComponent.ClientBasketTooltipComponent::new);
     }
 
 }

@@ -3,6 +3,7 @@ package net.firemuffin303.omorbasket.client.renderer;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.logging.LogUtils;
 import com.mojang.math.Axis;
 import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.common.block.BasketBlock;
@@ -66,7 +67,7 @@ public class PicnicBasketRenderer implements BlockEntityRenderer<BasketBlockEnti
 
         ResourceLocation resourceLocation = MATERIALS.get(blockEntity.getColor().getId());
 
-        if(blockEntity.getColor().equals(DyeColor.BLACK) & blockEntity.getName().getString().toLowerCase(Locale.ROOT).equals("something")){
+        if(blockEntity.getColor().equals(DyeColor.BLACK) && blockEntity.getCustomName() != null && blockEntity.getCustomName().getString().toLowerCase(Locale.ROOT).equals("something")){
             resourceLocation = new ResourceLocation(PicnicMod.MOD_ID,"textures/block/picnic_basket/something.png");
         }
 
@@ -81,15 +82,6 @@ public class PicnicBasketRenderer implements BlockEntityRenderer<BasketBlockEnti
         this.handle.render(poseStack,vertexConsumer,i,j);
         this.render(poseStack, vertexConsumer, this.lid, this.bottom, openNess, i, j);
 
-       //ResourceLocation colorOverlay = MATERIALS.get(blockEntity.getColor().getId());
-
-       //if(blockEntity.getColor().equals(DyeColor.BLACK) & blockEntity.getName().getString().toLowerCase(Locale.ROOT).equals("something")){
-       //    colorOverlay = new ResourceLocation(OmorBasketMod.MOD_ID,"textures/block/picnic_basket/something.png");
-       //}
-
-
-        //this.lid.render(poseStack,multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(colorOverlay)),i,j);
-        //this.bottom.render(poseStack,multiBufferSource.getBuffer(RenderType.entityCutoutNoCull(colorOverlay)),i,j);
         poseStack.popPose();
     }
 

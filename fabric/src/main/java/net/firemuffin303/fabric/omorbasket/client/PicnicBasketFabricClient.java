@@ -3,6 +3,8 @@ package net.firemuffin303.fabric.omorbasket.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
+import net.firemuffin303.omorbasket.client.BasketTooltipComponent;
 import net.firemuffin303.omorbasket.client.registry.ModBlockEntityRenderer;
 import net.firemuffin303.omorbasket.client.registry.ModScreens;
 import net.firemuffin303.omorbasket.common.registry.ModItems;
@@ -35,6 +37,12 @@ public class PicnicBasketFabricClient implements ClientModInitializer {
 
         ModScreens.init();
 
+        TooltipComponentCallback.EVENT.register(tooltipData -> {
+            if(tooltipData instanceof BasketTooltipComponent basketTooltipComponent){
+                return new BasketTooltipComponent.ClientBasketTooltipComponent(basketTooltipComponent);
+            }
 
+            return null;
+        });
     }
 }

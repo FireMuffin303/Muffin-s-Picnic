@@ -55,7 +55,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     public BasketBlock(DyeColor dyeColor,Properties properties) {
         super(properties);
         this.color = dyeColor;
-        this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any().setValue(FACING, Direction.NORTH)).setValue(WATERLOGGED,false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED,false));
 
     }
 

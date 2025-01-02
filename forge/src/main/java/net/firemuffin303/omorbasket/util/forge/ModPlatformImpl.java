@@ -25,6 +25,9 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -74,6 +77,10 @@ public class ModPlatformImpl {
         Registry.register(BuiltInRegistries.CUSTOM_STAT,id,resourceLocation);
         Stats.CUSTOM.get(resourceLocation, StatFormatter.DEFAULT);
         return resourceLocation;
+    }
+
+    public static <T extends Recipe<?>> Supplier<RecipeSerializer<T>> registerRecipeSerializer(String id, Supplier<RecipeSerializer<T>> recipeSerializer) {
+        return OmorBasketForge.RECIPE_SERIALIZERS.register(id,recipeSerializer);
     }
 
 }

@@ -1,10 +1,7 @@
 package net.firemuffin303.omorbasket;
 
 import com.mojang.datafixers.util.Pair;
-import net.firemuffin303.omorbasket.common.registry.ModBlocks;
-import net.firemuffin303.omorbasket.common.registry.ModItems;
-import net.firemuffin303.omorbasket.common.registry.ModMenuType;
-import net.firemuffin303.omorbasket.common.registry.ModStat;
+import net.firemuffin303.omorbasket.common.registry.*;
 import net.firemuffin303.omorbasket.mixin.StructurePoolAccessorMixin;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -29,6 +26,7 @@ public class PicnicMod {
         ModBlocks.init();
         ModItems.init();
         ModStat.init();
+        ModRecipeSerializer.init();
     }
 
     public static void initVillagerStructures(MinecraftServer server){
@@ -58,5 +56,11 @@ public class PicnicMod {
         for(int i = 0; i < weight; i++){
             ((StructurePoolAccessorMixin)structure).getTemplates().add(singlePoolElement);
         }
+    }
+
+    public enum PicnicAllowance{
+        NOT_BLACKLIST,
+        ONLY_WHITELIST,
+        ONLY_FOOD
     }
 }

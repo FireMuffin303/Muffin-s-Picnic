@@ -1,5 +1,6 @@
 package net.firemuffin303.omorbasket.common.item;
 
+import net.firemuffin303.omorbasket.client.BasketTooltipComponent;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -9,6 +10,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -32,11 +34,11 @@ public class PicnicBasketItem extends BlockItem {
         }
     }
 
-    public Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
+    public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {
         NonNullList<ItemStack> nonNullList = NonNullList.create();
         Stream<ItemStack> var10000 = getContents(itemStack);
         Objects.requireNonNull(nonNullList);
         var10000.forEach(nonNullList::add);
-        return Optional.of(new BundleTooltip(nonNullList, 64));
+        return Optional.of(new BasketTooltipComponent(nonNullList));
     }
 }

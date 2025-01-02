@@ -1,5 +1,7 @@
 package net.firemuffin303.omorbasket.util.fabric;
 
+import com.mojang.logging.LogUtils;
+import com.mojang.realmsclient.client.Request;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -12,6 +14,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.StatFormatter;
@@ -24,6 +27,10 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -79,6 +86,11 @@ public class ModPlatformImpl {
         Registry.register(BuiltInRegistries.CUSTOM_STAT,id,resourceLocation);
         Stats.CUSTOM.get(resourceLocation, StatFormatter.DEFAULT);
         return resourceLocation;
+    }
+
+    public static <T extends Recipe<?>> Supplier<RecipeSerializer<T>> registerRecipeSerializer(String id, Supplier<RecipeSerializer<T>> recipeSerializer) {
+        RecipeSerializer<T> recipeSerializer1 = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,new ResourceLocation(PicnicMod.MOD_ID,id),recipeSerializer.get());
+        return () -> recipeSerializer1;
     }
 
 }

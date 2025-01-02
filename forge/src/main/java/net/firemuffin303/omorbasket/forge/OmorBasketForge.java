@@ -6,11 +6,11 @@ import net.firemuffin303.omorbasket.common.registry.ModItems;
 import net.firemuffin303.omorbasket.common.registry.ModMenuType;
 import net.firemuffin303.omorbasket.common.registry.ModStat;
 import net.firemuffin303.omorbasket.forge.structure.VillageStructures;
-import net.minecraft.stats.StatFormatter;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,6 +30,8 @@ public class OmorBasketForge {
     public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(ForgeRegistries.MENU_TYPES, PicnicMod.MOD_ID);
     public static final DeferredRegister<Block> BLOCK = DeferredRegister.create(ForgeRegistries.BLOCKS, PicnicMod.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PicnicMod.MOD_ID);
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS,PicnicMod.MOD_ID);
+
 
     public OmorBasketForge() {
         // Submit our event bus to let architectury register our content on the right time
@@ -40,6 +42,7 @@ public class OmorBasketForge {
         BLOCK_ENTITY_TYPES.register(modEventBus);
         BLOCK.register(modEventBus);
         ITEMS.register(modEventBus);
+        RECIPE_SERIALIZERS.register(modEventBus);
 
         modEventBus.addListener(EventPriority.HIGH,this::registerEvent);
         modEventBus.addListener(EventPriority.HIGH,this::registerCreativeTabModify);

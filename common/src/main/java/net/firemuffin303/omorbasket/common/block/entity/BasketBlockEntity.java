@@ -1,5 +1,6 @@
 package net.firemuffin303.omorbasket.common.block.entity;
 
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.common.block.BasketBlock;
 import net.firemuffin303.omorbasket.common.menu.PicnicBasketMenu;
@@ -10,6 +11,9 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -25,6 +29,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class BasketBlockEntity extends RandomizableContainerBlockEntity implements LidBlockEntity {
     private NonNullList<ItemStack> items;
@@ -82,17 +88,17 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
     }
 
     @Override
-    protected Component getDefaultName() {
+    protected @NotNull Component getDefaultName() {
         return Component.translatable(PicnicMod.MOD_ID + ".container.basket");
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int i, Inventory inventory) {
+    protected @NotNull AbstractContainerMenu createMenu(int i, Inventory inventory) {
         return new PicnicBasketMenu(i,inventory,this);
     }
 
     @Override
-    protected NonNullList<ItemStack> getItems() {
+    protected @NotNull NonNullList<ItemStack> getItems() {
         return this.items;
     }
 
@@ -121,11 +127,11 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
     }
 
     void playSound(BlockState blockState, SoundEvent soundEvent) {
-        Vec3i vec3i = ((Direction)blockState.getValue(BasketBlock.FACING)).getNormal();
+        Vec3i vec3i = blockState.getValue(BasketBlock.FACING).getNormal();
         double d = (double)this.worldPosition.getX() + 0.5D + (double)vec3i.getX() / 2.0D;
         double e = (double)this.worldPosition.getY() + 0.5D + (double)vec3i.getY() / 2.0D;
         double f = (double)this.worldPosition.getZ() + 0.5D + (double)vec3i.getZ() / 2.0D;
-        this.level.playSound((Player)null, d, e, f, soundEvent, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
+        this.level.playSound(null, d, e, f, soundEvent, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
     }
 
     @Override
@@ -149,5 +155,17 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
     protected void signalOpenCount(Level level, BlockPos blockPos, BlockState blockState, int i, int j) {
         Block block = blockState.getBlock();
         level.blockEvent(blockPos, block, 1, j);
+    }
+
+    @Override
+    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
+        var a = ClientboundBlockEntityDataPacket.create(this);
+        LogUtils.getLogger().info(a.getTag() +"");
+        return a;
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        return this.saveWithoutMetadata();
     }
 }

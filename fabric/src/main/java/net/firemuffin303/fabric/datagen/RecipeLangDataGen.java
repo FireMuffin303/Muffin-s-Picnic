@@ -3,9 +3,11 @@ package net.firemuffin303.fabric.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.firemuffin303.omorbasket.common.registry.ModItems;
+import net.firemuffin303.omorbasket.common.registry.ModRecipeSerializer;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -37,6 +39,7 @@ public class RecipeLangDataGen extends FabricRecipeProvider {
         picnic(ModItems.MAGENTA_PICNIC_BASKET,Items.MAGENTA_CARPET,exporter);
         picnic(ModItems.PINK_PICNIC_BASKET,Items.PINK_CARPET,exporter);
 
+        SpecialRecipeBuilder.special(ModRecipeSerializer.BASKET_COLORING.get()).save(exporter,"basket_coloring");
     }
 
     public void picnic(Item result,Item carpet,Consumer<FinishedRecipe> consumer){
