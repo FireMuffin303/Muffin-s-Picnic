@@ -17,6 +17,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
@@ -32,6 +34,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ForgeItemTagsProvider;
 
 import java.util.ArrayList;
 import java.util.function.Supplier;
@@ -85,7 +89,24 @@ public class ModPlatformImpl {
     }
 
     public static PicnicMod.PicnicAllowance getPicnicAllowance(Level level) {
-        return PicnicMod.PicnicAllowance.ONLY_FOOD;
+        int i = level.getGameRules().getRule(OmorBasketForge.PICNIC_ALLOWANCE).get();
+        switch(i){
+            case 0,1 -> {
+                return PicnicMod.PicnicAllowance.NOT_BLACKLIST;
+            }
+            case 2 -> {
+                return PicnicMod.PicnicAllowance.ONLY_WHITELIST;
+            }
+
+            default -> {
+                return PicnicMod.PicnicAllowance.ONLY_FOOD;
+            }
+        }
+    }
+
+    public static boolean getFoodTag(ItemStack itemStack) {
+        //Forge doesn't have food tag somehow.
+        return itemStack.isEdible();
     }
 
 }

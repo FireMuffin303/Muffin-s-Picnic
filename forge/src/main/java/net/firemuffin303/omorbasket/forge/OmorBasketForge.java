@@ -2,6 +2,7 @@ package net.firemuffin303.omorbasket.forge;
 
 import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.common.registry.*;
+import net.firemuffin303.omorbasket.forge.gamerule.EnumValue;
 import net.firemuffin303.omorbasket.forge.structure.VillageStructures;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -14,7 +15,11 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.IConfigSpec;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -30,7 +35,8 @@ public class OmorBasketForge {
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS,PicnicMod.MOD_ID);
 
     //I hate forge. And I know that once this updated to 1.20.2+, I will free from forge. :D
-    //public static final GameRules.Key<EnumValue<PicnicMod.PicnicAllowance>> PICNIC_ALLOWANCE = GameRules.register(PicnicMod.MOD_ID+":picnicAllowance",GameRules.Category.MISC,new EnumValue<>())
+    //I spend too much time on forge.
+    public static final GameRules.Key<GameRules.IntegerValue> PICNIC_ALLOWANCE = GameRules.register(PicnicMod.MOD_ID+":picnicAllowance",GameRules.Category.MISC, GameRules.IntegerValue.create(3));
 
     public OmorBasketForge() {
         // Submit our event bus to let architectury register our content on the right time
@@ -47,6 +53,8 @@ public class OmorBasketForge {
         modEventBus.addListener(EventPriority.HIGH,this::registerCreativeTabModify);
         modEventBus.addListener(EventPriority.HIGH,this::commonSetup);
         MinecraftForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
+
+
     }
 
 
@@ -67,5 +75,4 @@ public class OmorBasketForge {
     private void commonSetup(FMLCommonSetupEvent event){
         event.enqueueWork(ModStat::init);
     }
-
 }

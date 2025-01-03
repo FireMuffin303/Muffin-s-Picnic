@@ -103,7 +103,7 @@ public class PicnicBasketMenu extends AbstractContainerMenu {
                 }
                 return itemStack.getItem().canFitInsideContainerItems();
             }else if(picnicAllowance == PicnicMod.PicnicAllowance.ONLY_FOOD){
-                return itemStack.getItem().isEdible() && itemStack.getItem().canFitInsideContainerItems();
+                return (itemStack.getItem().isEdible() || ModPlatform.getFoodTag(itemStack)) && itemStack.getItem().canFitInsideContainerItems();
             } else if (picnicAllowance == PicnicMod.PicnicAllowance.ONLY_WHITELIST) {
                 return itemStack.is(ModItemTags.PICNIC_BASKET_WHITELIST) && itemStack.getItem().canFitInsideContainerItems();
             }

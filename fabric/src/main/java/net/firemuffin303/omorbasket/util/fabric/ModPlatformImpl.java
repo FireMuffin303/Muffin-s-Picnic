@@ -5,6 +5,7 @@ import com.mojang.realmsclient.client.Request;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalItemTags;
 import net.firemuffin303.fabric.omorbasket.OmorBasketFabric;
 import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.util.ModPlatform;
@@ -20,6 +21,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
@@ -97,6 +99,10 @@ public class ModPlatformImpl {
 
     public static PicnicMod.PicnicAllowance getPicnicAllowance(Level level) {
         return level.getGameRules().getRule(OmorBasketFabric.PICNIC_ALLOWANCE).get();
+    }
+
+    public static boolean getFoodTag(ItemStack itemStack) {
+        return itemStack.is(ConventionalItemTags.FOODS);
     }
 
 }

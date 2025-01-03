@@ -1,5 +1,6 @@
-package net.firemuffin303.omorbasket.forge;
+package net.firemuffin303.omorbasket.forge.gamerule;
 
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.MinecraftServer;
@@ -9,19 +10,36 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Locale;
 
 public class EnumValue<T extends Enum<T>> extends GameRules.Value<EnumValue<T>> {
+    private final Class<T> classType;
     private T value;
-    public EnumValue(GameRules.Type<EnumValue<T>> arg) {
+    public EnumValue(GameRules.Type<EnumValue<T>> arg,T value) {
         super(arg);
+        this.classType = value.getDeclaringClass();
+        this.value = value;
     }
+
+    /*
+    public static <T extends Enum<T>> GameRules.Type<EnumValue<T>> create(T value){
+        return create(value,(minecraftServer, tEnumValue) -> {});
+    }
+
+
+    public static <T extends Enum<T>> GameRules.Type<EnumValue<T>> create(T value, BiConsumer<MinecraftServer,EnumValue<T>> consumer){
+        return new GameRules.Type<>(StringArgumentType::string, (enumValueType) -> {
+            return new EnumValue<>(enumValueType,Enum.valueOf(enumValueType.createRule().classType,value.name()));
+        },consumer);
+    }
+
+     */
 
     @Override
     protected void updateFromArgument(CommandContext<CommandSourceStack> commandContext, String string) {
-
+        this.value = Enum.valueOf(this.classType,StringArgumentType.getString(commandContext,string));
     }
 
     @Override
     protected void deserialize(String string) {
-
+        this.value = Enum.valueOf(this.classType,string);
     }
 
     @Override
@@ -41,7 +59,7 @@ public class EnumValue<T extends Enum<T>> extends GameRules.Value<EnumValue<T>> 
 
     @Override
     protected EnumValue<T> copy() {
-        return new EnumValue<>(this.type);
+        return new EnumValue<>(this.type,this.value);
     }
 
     @Override

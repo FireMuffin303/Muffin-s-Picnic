@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Inventory;
@@ -72,6 +73,11 @@ public class ModPlatform {
 
     @ExpectPlatform
     public static PicnicMod.PicnicAllowance getPicnicAllowance(Level level){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static boolean getFoodTag(ItemStack itemStack){
         throw new AssertionError();
     }
 

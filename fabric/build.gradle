@@ -48,6 +48,10 @@ processResources {
     }
 }
 
+jar{
+    archivesBaseName = "$rootProject.archives_base_name-$rootProject.minecraft_version-$project.name"
+}
+
 shadowJar {
     exclude "architectury.common.json"
 

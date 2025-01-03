@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 public class OmorBasketFabric implements ModInitializer {
     public static final Logger LOGGER = LoggerFactory.getLogger(PicnicMod.MOD_ID);
-    public static final GameRules.Key<EnumRule<PicnicMod.PicnicAllowance>> PICNIC_ALLOWANCE = GameRuleRegistry.register(PicnicMod.MOD_ID+":picnicAllowance", GameRules.Category.MISC, GameRuleFactory.createEnumRule(PicnicMod.PicnicAllowance.NOT_BLACKLIST));
+    public static final GameRules.Key<EnumRule<PicnicMod.PicnicAllowance>> PICNIC_ALLOWANCE = GameRuleRegistry.register(PicnicMod.MOD_ID+":picnicAllowance", GameRules.Category.MISC, GameRuleFactory.createEnumRule(PicnicMod.PicnicAllowance.ONLY_FOOD));
 
     @Override
     public void onInitialize() {
