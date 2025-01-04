@@ -1,7 +1,7 @@
 package net.firemuffin303.omorbasket.common.registry;
 
 import net.firemuffin303.omorbasket.common.BasketColoringRecipe;
-import net.firemuffin303.omorbasket.util.ModPlatform;
+import net.firemuffin303.omorbasket.ModPlatform;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 

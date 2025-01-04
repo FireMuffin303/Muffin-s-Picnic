@@ -1,7 +1,7 @@
 package net.firemuffin303.omorbasket.common.registry;
 
 import net.firemuffin303.omorbasket.common.item.PicnicBasketItem;
-import net.firemuffin303.omorbasket.util.ModPlatform;
+import net.firemuffin303.omorbasket.ModPlatform;
 import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;

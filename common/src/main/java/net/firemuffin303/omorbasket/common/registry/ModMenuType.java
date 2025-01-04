@@ -1,8 +1,7 @@
 package net.firemuffin303.omorbasket.common.registry;
 
-import net.firemuffin303.omorbasket.common.block.entity.BasketBlockEntity;
 import net.firemuffin303.omorbasket.common.menu.PicnicBasketMenu;
-import net.firemuffin303.omorbasket.util.ModPlatform;
+import net.firemuffin303.omorbasket.ModPlatform;
 import net.minecraft.world.inventory.MenuType;
 
 public class ModMenuType {

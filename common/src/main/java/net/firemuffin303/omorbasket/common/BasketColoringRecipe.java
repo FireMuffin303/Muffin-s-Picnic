@@ -16,8 +16,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
 public class BasketColoringRecipe extends CustomRecipe {
-    public BasketColoringRecipe(ResourceLocation resourceLocation, CraftingBookCategory craftingBookCategory) {
-        super(resourceLocation, craftingBookCategory);
+    public BasketColoringRecipe(CraftingBookCategory craftingBookCategory) {
+        super(craftingBookCategory);
     }
 
     @Override

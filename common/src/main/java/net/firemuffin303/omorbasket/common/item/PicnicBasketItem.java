@@ -1,11 +1,10 @@
 package net.firemuffin303.omorbasket.common.item;
 
-import net.firemuffin303.omorbasket.client.BasketTooltipComponent;
+import net.firemuffin303.omorbasket.fabric.client.BasketTooltipComponent;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.world.inventory.tooltip.BundleTooltip;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;

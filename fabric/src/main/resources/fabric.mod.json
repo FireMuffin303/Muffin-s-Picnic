@@ -17,18 +17,17 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.firemuffin303.fabric.omorbasket.OmorBasketFabric"
+      "net.firemuffin303.omorbasket.fabric.OmorBasketFabric"
     ],
     "client": [
-      "net.firemuffin303.fabric.omorbasket.client.PicnicBasketFabricClient"
+      "net.firemuffin303.omorbasket.fabric.client.PicnicBasketFabricClient"
     ],
 
     "fabric-datagen": [
-      "net.firemuffin303.fabric.datagen.ModDataGen"
+      "net.firemuffin303.omorbasket.fabric.datagen.ModDataGen"
     ]
   },
   "mixins": [
-    "muffins_picnic.mixins.json",
     "muffins_picnic-common.mixins.json"
   ],
   "depends": {

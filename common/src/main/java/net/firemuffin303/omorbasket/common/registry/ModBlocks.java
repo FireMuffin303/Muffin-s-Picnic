@@ -2,7 +2,7 @@ package net.firemuffin303.omorbasket.common.registry;
 
 import net.firemuffin303.omorbasket.common.block.BasketBlock;
 import net.firemuffin303.omorbasket.common.block.entity.BasketBlockEntity;
-import net.firemuffin303.omorbasket.util.ModPlatform;
+import net.firemuffin303.omorbasket.ModPlatform;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;

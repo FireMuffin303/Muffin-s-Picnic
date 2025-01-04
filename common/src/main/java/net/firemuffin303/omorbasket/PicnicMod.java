@@ -1,6 +1,7 @@
 package net.firemuffin303.omorbasket;
 
 import com.mojang.datafixers.util.Pair;
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.omorbasket.common.registry.*;
 import net.firemuffin303.omorbasket.mixin.StructurePoolAccessorMixin;
 import net.minecraft.core.Holder;
@@ -9,13 +10,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
+import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +24,7 @@ public class PicnicMod {
 
 
     public static void init() {
+        LogUtils.getLogger().info("Muffin's Picnic Loaded");
         ModMenuType.init();
         ModBlocks.ModBlockEntityTypes.init();
         ModBlocks.init();

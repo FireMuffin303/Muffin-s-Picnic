@@ -1,0 +1,28 @@
+modLoader = "javafml"
+loaderVersion = "*"
+issueTrackerURL = "https://github.com/FireMuffin303/Muffin-s-Picnic/issues"
+license = "MIT License"
+
+[[mods]]
+modId = "muffins_picnic"
+version = "${version}"
+displayName = "Muffin's Picnic"
+authors = "FireMuffin303"
+description = '''
+Add Picnic Basket to carry items and hangout!
+'''
+logoFile = "icon.png"
+
+[[dependencies.muffins_picnic]]
+modId = "neoforge"
+mandatory = true
+versionRange = "[20.2.86,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.muffins_picnic]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.2,)"
+ordering = "NONE"
+side = "BOTH"
