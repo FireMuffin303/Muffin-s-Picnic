@@ -33,18 +33,20 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ModPlatformImpl {
     public static <T extends Block> Supplier<T> registryBlock(String id, Supplier<T> block) {
-        Registry.register(BuiltInRegistries.BLOCK,new ResourceLocation(PicnicMod.MOD_ID,id),block.get());
-        return block;
+        T block1 = Registry.register(BuiltInRegistries.BLOCK,new ResourceLocation(PicnicMod.MOD_ID,id),block.get());
+        return () -> block1;
     }
 
 
     public static <T extends Item> Supplier<T> registryItem(String id, Supplier<T> item) {
-        Registry.register(BuiltInRegistries.ITEM,new ResourceLocation(PicnicMod.MOD_ID,id),item.get());
-        return item;
+        T item1 = Registry.register(BuiltInRegistries.ITEM,new ResourceLocation(PicnicMod.MOD_ID,id),item.get());
+        return () -> item1;
     }
 
     public static CreativeModeTab createCreativeModeTab(ResourceLocation resourceLocation, Supplier<ItemStack> icon, ArrayList<Item> itemList) {
@@ -56,10 +58,9 @@ public class ModPlatformImpl {
         return creativeModeTab1;
     }
 
-    public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id, ModPlatform.BlockEntitySupplier<T> blockEntityTypeSupplier, Block... block) {
-        BlockEntityType<T> blockEntityType = BlockEntityType.Builder.of(blockEntityTypeSupplier::create,block).build(null);
-        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,new ResourceLocation(PicnicMod.MOD_ID,id),blockEntityType);
-        return blockEntityType;
+    public static <T extends BlockEntity> Supplier<BlockEntityType<T>> registerBlockEntity(String id, ModPlatform.BlockEntitySupplier<T> blockEntityTypeSupplier, Block... blocks) {
+        BlockEntityType<T> blockEntityType = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,new ResourceLocation(PicnicMod.MOD_ID,id),BlockEntityType.Builder.of(blockEntityTypeSupplier::create, blocks).build(null));
+        return () -> blockEntityType;
     }
 
     public static <T extends AbstractContainerMenu> MenuType<T> registryMenu(String id, ModPlatform.MenuSupplier<T> menu) {

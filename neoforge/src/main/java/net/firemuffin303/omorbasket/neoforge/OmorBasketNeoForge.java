@@ -5,6 +5,7 @@ import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.common.registry.*;
 import net.firemuffin303.omorbasket.neoforge.structure.VillageStructures;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -21,12 +22,13 @@ import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.RegisterEvent;
 
 @Mod(PicnicMod.MOD_ID)
 public class OmorBasketNeoForge {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, PicnicMod.MOD_ID);
     public static final DeferredRegister<MenuType<?>> MENU_TYPE = DeferredRegister.create(BuiltInRegistries.MENU, PicnicMod.MOD_ID);
     public static final DeferredRegister<Block> BLOCK = DeferredRegister.create(BuiltInRegistries.BLOCK, PicnicMod.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, PicnicMod.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, PicnicMod.MOD_ID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER,PicnicMod.MOD_ID);
     public static final DeferredRegister<ResourceLocation> CUSTOM_STAT = DeferredRegister.create(BuiltInRegistries.CUSTOM_STAT,PicnicMod.MOD_ID);
@@ -38,10 +40,10 @@ public class OmorBasketNeoForge {
     public OmorBasketNeoForge(IEventBus modEventBus) {
         // Submit our event bus to let architectury register our content on the right time
         PicnicMod.init();
-        LogUtils.getLogger().info("Picnic Neoforge Load");
+
         MENU_TYPE.register(modEventBus);
-        BLOCK_ENTITY_TYPES.register(modEventBus);
         BLOCK.register(modEventBus);
+        BLOCK_ENTITY_TYPES.register(modEventBus);
         ITEMS.register(modEventBus);
         RECIPE_SERIALIZERS.register(modEventBus);
         CUSTOM_STAT.register(modEventBus);

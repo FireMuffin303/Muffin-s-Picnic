@@ -24,32 +24,22 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import org.apache.commons.logging.Log;
 
 import java.util.function.Supplier;
 
 public class ModPlatformImpl {
     public static <T extends Block> Supplier<T> registryBlock(String id, Supplier<T> block) {
-        Supplier<T> supBlock = OmorBasketNeoForge.BLOCK.register(id,block);
-        return supBlock;
+        return OmorBasketNeoForge.BLOCK.register(id,block);
     }
 
 
     public static <T extends Item> Supplier<T> registryItem(String id, Supplier<T> item) {
-        Supplier<T> supItem = OmorBasketNeoForge.ITEMS.register(id,item);
-        LogUtils.getLogger().info("register "+supItem.get().toString());
-        return supItem;
+        return OmorBasketNeoForge.ITEMS.register(id,item);
     }
 
 
-    public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id,ModPlatform.BlockEntitySupplier<T> blockEntityTypeSupplier,Block... block) {
-        BlockEntityType<T> blockEntityType = BlockEntityType.Builder.of(blockEntityTypeSupplier::create,block).build(null);
-        OmorBasketNeoForge.BLOCK_ENTITY_TYPES.register(id,()->blockEntityType);
-        return blockEntityType;
-    }
-
-    public static <T extends BlockEntity> BlockEntityType.Builder<T> buildBlockEntity(ModPlatform.BlockEntitySupplier<T> blockEntityTypeSupplier, Block block) {
-        return BlockEntityType.Builder.of(blockEntityTypeSupplier::create,block);
+    public static <T extends BlockEntity> Supplier<BlockEntityType<T>> registerBlockEntity(String id, ModPlatform.BlockEntitySupplier<T> blockEntityTypeSupplier, Block... blocks) {
+        return OmorBasketNeoForge.BLOCK_ENTITY_TYPES.register(id,()-> BlockEntityType.Builder.of(blockEntityTypeSupplier::create,blocks).build(null));
     }
 
     public static <T extends AbstractContainerMenu> MenuType<T> registryMenu(String id, ModPlatform.MenuSupplier<T> menu) {
@@ -69,7 +59,7 @@ public class ModPlatformImpl {
     public static ResourceLocation registryCustomStat(String id) {
         ResourceLocation resourceLocation = new ResourceLocation(PicnicMod.MOD_ID,id);
         OmorBasketNeoForge.CUSTOM_STAT.register(id,() -> resourceLocation);
-        Stats.CUSTOM.get(resourceLocation, StatFormatter.DEFAULT);
+        //Stats.CUSTOM.get(resourceLocation, StatFormatter.DEFAULT);
         return resourceLocation;
     }
 

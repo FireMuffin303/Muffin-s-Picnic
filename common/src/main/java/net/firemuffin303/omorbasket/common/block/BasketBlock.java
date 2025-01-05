@@ -122,7 +122,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide ? createTickerHelper(blockEntityType, ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY, BasketBlockEntity::lidAnimateTick) : null;
+        return level.isClientSide ? createTickerHelper(blockEntityType, ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY.get(), BasketBlockEntity::lidAnimateTick) : null;
     }
 
     @Override
@@ -146,7 +146,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
     public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
         ItemStack itemStack = super.getCloneItemStack(blockGetter, blockPos, blockState);
-        blockGetter.getBlockEntity(blockPos, ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY).ifPresent((basketBlockEntity) -> {
+        blockGetter.getBlockEntity(blockPos, ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY.get()).ifPresent((basketBlockEntity) -> {
             basketBlockEntity.saveToItem(itemStack);
         });
         return itemStack;
@@ -203,22 +203,22 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
     public static Block getBlockByColor(@Nullable DyeColor color){
         Map<DyeColor,Block> map = new HashMap<>();
-        map.put(DyeColor.WHITE,ModBlocks.WHITE_PICNIC_BASKET);
-        map.put(DyeColor.LIGHT_GRAY,ModBlocks.LIGHT_GRAY_PICNIC_BASKET);
-        map.put(DyeColor.GRAY,ModBlocks.GRAY_PICNIC_BASKET);
-        map.put(DyeColor.BLACK,ModBlocks.BLACK_PICNIC_BASKET);
-        map.put(DyeColor.BROWN,ModBlocks.BROWN_PICNIC_BASKET);
-        map.put(DyeColor.RED,ModBlocks.RED_PICNIC_BASKET);
-        map.put(DyeColor.ORANGE,ModBlocks.ORANGE_PICNIC_BASKET);
-        map.put(DyeColor.YELLOW,ModBlocks.YELLOW_PICNIC_BASKET);
-        map.put(DyeColor.LIME,ModBlocks.LIME_PICNIC_BASKET);
-        map.put(DyeColor.GREEN,ModBlocks.GREEN_PICNIC_BASKET);
-        map.put(DyeColor.CYAN,ModBlocks.CYAN_PICNIC_BASKET);
-        map.put(DyeColor.LIGHT_BLUE,ModBlocks.LIGHT_BLUE_PICNIC_BASKET);
-        map.put(DyeColor.BLUE,ModBlocks.BLUE_PICNIC_BASKET);
-        map.put(DyeColor.PURPLE,ModBlocks.PURPLE_PICNIC_BASKET);
-        map.put(DyeColor.MAGENTA,ModBlocks.MAGENTA_PICNIC_BASKET);
-        map.put(DyeColor.PINK,ModBlocks.PINK_PICNIC_BASKET);
+        map.put(DyeColor.WHITE,ModBlocks.WHITE_PICNIC_BASKET.get());
+        map.put(DyeColor.LIGHT_GRAY,ModBlocks.LIGHT_GRAY_PICNIC_BASKET.get());
+        map.put(DyeColor.GRAY,ModBlocks.GRAY_PICNIC_BASKET.get());
+        map.put(DyeColor.BLACK,ModBlocks.BLACK_PICNIC_BASKET.get());
+        map.put(DyeColor.BROWN,ModBlocks.BROWN_PICNIC_BASKET.get());
+        map.put(DyeColor.RED,ModBlocks.RED_PICNIC_BASKET.get());
+        map.put(DyeColor.ORANGE,ModBlocks.ORANGE_PICNIC_BASKET.get());
+        map.put(DyeColor.YELLOW,ModBlocks.YELLOW_PICNIC_BASKET.get());
+        map.put(DyeColor.LIME,ModBlocks.LIME_PICNIC_BASKET.get());
+        map.put(DyeColor.GREEN,ModBlocks.GREEN_PICNIC_BASKET.get());
+        map.put(DyeColor.CYAN,ModBlocks.CYAN_PICNIC_BASKET.get());
+        map.put(DyeColor.LIGHT_BLUE,ModBlocks.LIGHT_BLUE_PICNIC_BASKET.get());
+        map.put(DyeColor.BLUE,ModBlocks.BLUE_PICNIC_BASKET.get());
+        map.put(DyeColor.PURPLE,ModBlocks.PURPLE_PICNIC_BASKET.get());
+        map.put(DyeColor.MAGENTA,ModBlocks.MAGENTA_PICNIC_BASKET.get());
+        map.put(DyeColor.PINK,ModBlocks.PINK_PICNIC_BASKET.get());
 
         return map.get(color);
     }

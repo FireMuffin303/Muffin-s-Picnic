@@ -39,7 +39,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
     private final DyeColor color;
 
     public BasketBlockEntity( BlockPos blockPos, BlockState blockState) {
-        super(ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY, blockPos, blockState);
+        super(ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY.get(), blockPos, blockState);
         this.items = NonNullList.withSize(9, ItemStack.EMPTY);
         this.color = BasketBlock.getColorFromBlock(blockState.getBlock());
         this.openersCounter = new ContainerOpenersCounter() {
@@ -159,9 +159,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 
     @Override
     public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
-        var a = ClientboundBlockEntityDataPacket.create(this);
-        LogUtils.getLogger().info(a.getTag() +"");
-        return a;
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override

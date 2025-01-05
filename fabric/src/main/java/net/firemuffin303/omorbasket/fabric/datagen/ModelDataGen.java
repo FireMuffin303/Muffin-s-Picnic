@@ -23,28 +23,28 @@ public class ModelDataGen extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
         ModBlocks.PICNIC.forEach((block) ->{
-            BasketBlock basketBlock = (BasketBlock) block;
-            PICNIC_BASKET_INVENTORY.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.defaultTexture(new ResourceLocation(PicnicMod.MOD_ID,"block/picnic_basket/"+basketBlock.getColor().getName())), blockStateModelGenerator.modelOutput);
+            BasketBlock basketBlock = (BasketBlock) block.get();
+            PICNIC_BASKET_INVENTORY.create(ModelLocationUtils.getModelLocation(block.get().asItem()), TextureMapping.defaultTexture(new ResourceLocation(PicnicMod.MOD_ID,"block/picnic_basket/"+basketBlock.getColor().getName())), blockStateModelGenerator.modelOutput);
         });
 
         blockStateModelGenerator.blockEntityModels(new ResourceLocation(PicnicMod.MOD_ID,"block/picnic_basket"), Blocks.SPRUCE_PLANKS)
                 .createWithoutBlockItem(
-                        ModBlocks.WHITE_PICNIC_BASKET,
-                        ModBlocks.LIGHT_GRAY_PICNIC_BASKET,
-                        ModBlocks.GRAY_PICNIC_BASKET,
-                        ModBlocks.BLACK_PICNIC_BASKET,
-                        ModBlocks.BROWN_PICNIC_BASKET,
-                        ModBlocks.RED_PICNIC_BASKET,
-                        ModBlocks.ORANGE_PICNIC_BASKET,
-                        ModBlocks.YELLOW_PICNIC_BASKET,
-                        ModBlocks.LIME_PICNIC_BASKET,
-                        ModBlocks.GREEN_PICNIC_BASKET,
-                        ModBlocks.LIGHT_BLUE_PICNIC_BASKET,
-                        ModBlocks.BLUE_PICNIC_BASKET,
-                        ModBlocks.CYAN_PICNIC_BASKET,
-                        ModBlocks.PURPLE_PICNIC_BASKET,
-                        ModBlocks.MAGENTA_PICNIC_BASKET,
-                        ModBlocks.PINK_PICNIC_BASKET);
+                        ModBlocks.WHITE_PICNIC_BASKET.get(),
+                        ModBlocks.LIGHT_GRAY_PICNIC_BASKET.get(),
+                        ModBlocks.GRAY_PICNIC_BASKET.get(),
+                        ModBlocks.BLACK_PICNIC_BASKET.get(),
+                        ModBlocks.BROWN_PICNIC_BASKET.get(),
+                        ModBlocks.RED_PICNIC_BASKET.get(),
+                        ModBlocks.ORANGE_PICNIC_BASKET.get(),
+                        ModBlocks.YELLOW_PICNIC_BASKET.get(),
+                        ModBlocks.LIME_PICNIC_BASKET.get(),
+                        ModBlocks.GREEN_PICNIC_BASKET.get(),
+                        ModBlocks.LIGHT_BLUE_PICNIC_BASKET.get(),
+                        ModBlocks.BLUE_PICNIC_BASKET.get(),
+                        ModBlocks.CYAN_PICNIC_BASKET.get(),
+                        ModBlocks.PURPLE_PICNIC_BASKET.get(),
+                        ModBlocks.MAGENTA_PICNIC_BASKET.get(),
+                        ModBlocks.PINK_PICNIC_BASKET.get());
 
     }
 

@@ -26,11 +26,11 @@ public class PicnicMod {
     public static void init() {
         LogUtils.getLogger().info("Muffin's Picnic Loaded");
         ModMenuType.init();
-        ModBlocks.ModBlockEntityTypes.init();
         ModBlocks.init();
+        ModBlocks.ModBlockEntityTypes.init();
         ModItems.init();
-        ModStat.init();
         ModRecipeSerializer.init();
+        ModStat.init();
     }
 
     public static void initVillagerStructures(MinecraftServer server){

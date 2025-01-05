@@ -10,6 +10,6 @@ public class ModBlockEntityRenderer {
     }
 
     public static void registerBlockEntityRenderer(ModPlatform.BlockEntityRendererRegistry registry){
-        registry.register(ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY, PicnicBasketRenderer::new);
+        registry.register(ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY.get(), PicnicBasketRenderer::new);
     }
 }

@@ -22,10 +22,20 @@ public class BlockLootTableDataGen extends FabricBlockLootTableProvider {
 
     @Override
     public void generate() {
-        ModBlocks.PICNIC.forEach((block) -> this.add(block,this::createPicnicBasket));
+        ModBlocks.PICNIC.forEach((block) -> this.add(block.get(),this::createPicnicBasket));
     }
 
     public net.minecraft.world.level.storage.loot.LootTable.Builder createPicnicBasket(Block block) {
-        return LootTable.lootTable().withPool((net.minecraft.world.level.storage.loot.LootPool.Builder)this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block).apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY)).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("Lock", "BlockEntityTag.Lock").copy("LootTable", "BlockEntityTag.LootTable").copy("LootTableSeed", "BlockEntityTag.LootTableSeed")).apply(SetContainerContents.setContents(ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY).withEntry(DynamicLoot.dynamicEntry(ShulkerBoxBlock.CONTENTS))))));
+        return LootTable.lootTable().withPool(
+                this.applyExplosionCondition(block, LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootItem.lootTableItem(block)
+                                .apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY))
+                                .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY)
+                                        .copy("Lock", "BlockEntityTag.Lock")
+                                        .copy("LootTable", "BlockEntityTag.LootTable")
+                                        .copy("LootTableSeed", "BlockEntityTag.LootTableSeed"))
+                                .apply(SetContainerContents.setContents(ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY.get())
+                                        .withEntry(DynamicLoot.dynamicEntry(ShulkerBoxBlock.CONTENTS))))));
     }
 }

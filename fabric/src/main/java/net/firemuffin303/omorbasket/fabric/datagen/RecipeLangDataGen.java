@@ -9,6 +9,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
+import java.util.function.Supplier;
+
 public class RecipeLangDataGen extends FabricRecipeProvider {
 
     public RecipeLangDataGen(FabricDataOutput output) {
@@ -37,8 +39,8 @@ public class RecipeLangDataGen extends FabricRecipeProvider {
         SpecialRecipeBuilder.special(ModRecipeSerializer.BASKET_COLORING.get()).save(exporter,"basket_coloring");
     }
 
-    public void picnic(Item result,Item carpet,RecipeOutput consumer){
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,result,1)
+    public void picnic(Supplier<Item> result, Item carpet, RecipeOutput consumer){
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,result.get(),1)
                 .define('A',ItemTags.WOODEN_SLABS)
                 .define('B',carpet)
                 .define('C',ItemTags.PLANKS)
@@ -46,7 +48,7 @@ public class RecipeLangDataGen extends FabricRecipeProvider {
                 .pattern("CBC")
                 .pattern("CCC")
                 .unlockedBy(getHasName(carpet),has(carpet))
-                .save(consumer, "crafting/"+getItemName(result)+"_from_crafting");
+                .save(consumer, "crafting/"+getItemName(result.get())+"_from_crafting");
     }
 
 }

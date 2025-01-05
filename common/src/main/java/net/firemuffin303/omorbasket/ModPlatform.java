@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ModPlatform {
@@ -43,7 +44,7 @@ public class ModPlatform {
     }
 
     @ExpectPlatform
-    public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntity(String id,ModPlatform.BlockEntitySupplier<T> blockEntityTypeSupplier,Block... block){
+    public static <T extends BlockEntity> Supplier<BlockEntityType<T>>  registerBlockEntity(String id, ModPlatform.BlockEntitySupplier<T> blockEntityTypeSupplier, Block... blocks){
         throw new AssertionError();
     }
 
