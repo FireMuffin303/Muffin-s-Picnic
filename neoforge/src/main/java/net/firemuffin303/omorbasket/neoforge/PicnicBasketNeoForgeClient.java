@@ -1,9 +1,9 @@
 package net.firemuffin303.omorbasket.neoforge;
 
 import net.firemuffin303.omorbasket.PicnicMod;
-import net.firemuffin303.omorbasket.fabric.client.BasketTooltipComponent;
-import net.firemuffin303.omorbasket.fabric.client.registry.ModBlockEntityRenderer;
-import net.firemuffin303.omorbasket.fabric.client.registry.ModScreens;
+import net.firemuffin303.omorbasket.client.BasketTooltipComponent;
+import net.firemuffin303.omorbasket.client.registry.ModBlockEntityRenderer;
+import net.firemuffin303.omorbasket.client.registry.ModScreens;
 import net.firemuffin303.omorbasket.ModPlatform;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;

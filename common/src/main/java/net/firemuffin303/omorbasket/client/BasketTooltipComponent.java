@@ -1,4 +1,4 @@
-package net.firemuffin303.omorbasket.fabric.client;
+package net.firemuffin303.omorbasket.client;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;

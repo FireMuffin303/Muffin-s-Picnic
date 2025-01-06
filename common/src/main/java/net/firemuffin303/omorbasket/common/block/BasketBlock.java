@@ -1,5 +1,7 @@
 package net.firemuffin303.omorbasket.common.block;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.firemuffin303.omorbasket.common.block.entity.BasketBlockEntity;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
 import net.firemuffin303.omorbasket.common.registry.ModStat;
@@ -19,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -45,6 +48,12 @@ import java.util.List;
 import java.util.Map;
 
 public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlock{
+    public static final MapCodec<BasketBlock> CODEC = RecordCodecBuilder.mapCodec(basketBlockInstance -> {
+        return basketBlockInstance.group(
+                DyeColor.CODEC.fieldOf("color").forGetter(basketBlock -> basketBlock.color),
+                propertiesCodec()
+        ).apply(basketBlockInstance, BasketBlock::new);
+    });
     public static final DirectionProperty FACING;
     public static final ResourceLocation CONTENTS;
     public static final BooleanProperty WATERLOGGED;
@@ -74,7 +83,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
         }
     }
 
-    public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
+    public BlockState playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
         BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity instanceof BasketBlockEntity basketBlockEntity) {
             if (!level.isClientSide && player.isCreative() && !basketBlockEntity.isEmpty()) {
@@ -92,7 +101,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
             }
         }
 
-        super.playerWillDestroy(level, blockPos, blockState, player);
+        return super.playerWillDestroy(level, blockPos, blockState, player);
     }
 
     public List<ItemStack> getDrops(BlockState blockState, LootParams.Builder builder) {
@@ -144,12 +153,17 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
         }
     }
 
-    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
-        ItemStack itemStack = super.getCloneItemStack(blockGetter, blockPos, blockState);
-        blockGetter.getBlockEntity(blockPos, ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY.get()).ifPresent((basketBlockEntity) -> {
+    public ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+        ItemStack itemStack = super.getCloneItemStack(levelReader, blockPos, blockState);
+        levelReader.getBlockEntity(blockPos, ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY.get()).ifPresent((basketBlockEntity) -> {
             basketBlockEntity.saveToItem(itemStack);
         });
         return itemStack;
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     public RenderShape getRenderShape(BlockState blockState) {

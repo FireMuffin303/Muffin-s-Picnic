@@ -1,4 +1,4 @@
-package net.firemuffin303.omorbasket.fabric.client.screens;
+package net.firemuffin303.omorbasket.client.screens;
 
 import net.firemuffin303.omorbasket.common.menu.PicnicBasketMenu;
 import net.minecraft.client.gui.GuiGraphics;

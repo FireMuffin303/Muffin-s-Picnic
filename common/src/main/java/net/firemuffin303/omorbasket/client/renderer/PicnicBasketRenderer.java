@@ -1,4 +1,4 @@
-package net.firemuffin303.omorbasket.fabric.client.renderer;
+package net.firemuffin303.omorbasket.client.renderer;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;

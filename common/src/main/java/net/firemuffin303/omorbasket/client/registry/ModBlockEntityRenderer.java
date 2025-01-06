@@ -1,6 +1,6 @@
-package net.firemuffin303.omorbasket.fabric.client.registry;
+package net.firemuffin303.omorbasket.client.registry;
 
-import net.firemuffin303.omorbasket.fabric.client.renderer.PicnicBasketRenderer;
+import net.firemuffin303.omorbasket.client.renderer.PicnicBasketRenderer;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
 import net.firemuffin303.omorbasket.ModPlatform;
 
