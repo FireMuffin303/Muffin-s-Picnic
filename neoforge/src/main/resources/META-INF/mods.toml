@@ -23,7 +23,7 @@ side = "BOTH"
 [[dependencies.muffins_picnic]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20.2,)"
+versionRange = "[1.20.5,)"
 ordering = "NONE"
 side = "BOTH"
 
