@@ -1,6 +1,5 @@
 package net.firemuffin303.omorbasket.neoforge;
 
-import com.mojang.logging.LogUtils;
 import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.common.registry.*;
 import net.firemuffin303.omorbasket.neoforge.structure.VillageStructures;
@@ -39,7 +38,7 @@ public class OmorBasketNeoForge {
 
     public OmorBasketNeoForge(IEventBus modEventBus) {
         // Submit our event bus to let architectury register our content on the right time
-        PicnicMod.init();
+        //PicnicMod.init();
 
         MENU_TYPE.register(modEventBus);
         BLOCK.register(modEventBus);
@@ -48,6 +47,7 @@ public class OmorBasketNeoForge {
         RECIPE_SERIALIZERS.register(modEventBus);
         CUSTOM_STAT.register(modEventBus);
 
+        modEventBus.addListener(EventPriority.HIGH,this::registerEvent);
         modEventBus.addListener(EventPriority.HIGH,this::registerCreativeTabModify);
         modEventBus.addListener(EventPriority.HIGH,this::commonSetup);
         NeoForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
@@ -55,7 +55,6 @@ public class OmorBasketNeoForge {
         if(FMLEnvironment.dist.isClient()){
             PicnicBasketNeoForgeClient.init();
         }
-
     }
 
 
@@ -65,8 +64,16 @@ public class OmorBasketNeoForge {
         }
     }
 
+    public void registerEvent(RegisterEvent registerEvent){
+        registerEvent.register(Registries.MENU,helper -> ModMenuType.init());
+        registerEvent.register(Registries.BLOCK_ENTITY_TYPE,helper -> ModBlocks.ModBlockEntityTypes.init());
+        registerEvent.register(Registries.BLOCK,helper -> ModBlocks.init());
+        registerEvent.register(Registries.ITEM,helper -> ModItems.init());
+        registerEvent.register(Registries.RECIPE_SERIALIZER,helper -> ModRecipeSerializer.init());
+        registerEvent.register(Registries.CUSTOM_STAT,helper -> ModStat.init());
+    }
 
     private void commonSetup(FMLCommonSetupEvent event){
-        event.enqueueWork(ModStat::init);
+        //event.enqueueWork(ModStat::init);
     }
 }
