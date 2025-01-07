@@ -32,7 +32,7 @@ public class PicnicBasketRenderer implements BlockEntityRenderer<BasketBlockEnti
     private final ModelPart bottom;
     private final ModelPart handle;
 
-    public static final ModelLayerLocation LAYER = new ModelLayerLocation(new ResourceLocation(PicnicMod.MOD_ID,"picnic_basket"),"main");
+    public static final ModelLayerLocation LAYER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,"picnic_basket"),"main");
 
     public PicnicBasketRenderer(BlockEntityRendererProvider.Context context){
         ModelPart modelPart = context.bakeLayer(LAYER);
@@ -67,7 +67,7 @@ public class PicnicBasketRenderer implements BlockEntityRenderer<BasketBlockEnti
         ResourceLocation resourceLocation = MATERIALS.get(blockEntity.getColor().getId());
 
         if(blockEntity.getColor().equals(DyeColor.BLACK) && blockEntity.getCustomName() != null && blockEntity.getCustomName().getString().toLowerCase(Locale.ROOT).equals("something")){
-            resourceLocation = new ResourceLocation(PicnicMod.MOD_ID,"textures/block/picnic_basket/something.png");
+            resourceLocation = ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,"textures/block/picnic_basket/something.png");
         }
 
         poseStack.pushPose();
@@ -104,7 +104,7 @@ public class PicnicBasketRenderer implements BlockEntityRenderer<BasketBlockEnti
 
     static {
         MATERIALS = Stream.of(DyeColor.values()).map((dyeColor) -> {
-            return new ResourceLocation(PicnicMod.MOD_ID,"textures/block/picnic_basket/" + dyeColor.getName() +".png");
+            return ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,"textures/block/picnic_basket/" + dyeColor.getName() +".png");
         }).collect(ImmutableList.toImmutableList());
     }
 }

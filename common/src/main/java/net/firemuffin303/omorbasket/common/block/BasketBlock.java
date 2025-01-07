@@ -242,6 +242,6 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     static{
         FACING = HorizontalDirectionalBlock.FACING;
         WATERLOGGED = BlockStateProperties.WATERLOGGED;
-        CONTENTS = new ResourceLocation("contents");
+        CONTENTS = ResourceLocation.fromNamespaceAndPath("minecraft","contents");
     }
 }

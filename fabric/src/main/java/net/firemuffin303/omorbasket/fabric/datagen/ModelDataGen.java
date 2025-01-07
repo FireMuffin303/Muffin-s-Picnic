@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import java.util.Optional;
 
 public class ModelDataGen extends FabricModelProvider {
-    private final ModelTemplate PICNIC_BASKET_INVENTORY = new ModelTemplate(Optional.of(new ResourceLocation(PicnicMod.MOD_ID, "item/picnic_basket_template")), Optional.empty(), TextureSlot.TEXTURE);
+    private final ModelTemplate PICNIC_BASKET_INVENTORY = new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID, "item/picnic_basket_template")), Optional.empty(), TextureSlot.TEXTURE);
 
     public ModelDataGen(FabricDataOutput output) {
         super(output);
@@ -25,10 +25,10 @@ public class ModelDataGen extends FabricModelProvider {
     public void generateBlockStateModels(BlockModelGenerators blockStateModelGenerator) {
         ModBlocks.PICNIC.forEach((block) ->{
             BasketBlock basketBlock = (BasketBlock) block.get();
-            PICNIC_BASKET_INVENTORY.create(ModelLocationUtils.getModelLocation(block.get().asItem()), TextureMapping.defaultTexture(new ResourceLocation(PicnicMod.MOD_ID,"block/picnic_basket/"+basketBlock.getColor().getName())), blockStateModelGenerator.modelOutput);
+            PICNIC_BASKET_INVENTORY.create(ModelLocationUtils.getModelLocation(block.get().asItem()), TextureMapping.defaultTexture(ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,"block/picnic_basket/"+basketBlock.getColor().getName())), blockStateModelGenerator.modelOutput);
         });
 
-        blockStateModelGenerator.blockEntityModels(new ResourceLocation(PicnicMod.MOD_ID,"block/picnic_basket"), Blocks.SPRUCE_PLANKS)
+        blockStateModelGenerator.blockEntityModels(ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,"block/picnic_basket"), Blocks.SPRUCE_PLANKS)
                 .createWithoutBlockItem(
                         ModBlocks.WHITE_PICNIC_BASKET.get(),
                         ModBlocks.LIGHT_GRAY_PICNIC_BASKET.get(),
@@ -54,6 +54,6 @@ public class ModelDataGen extends FabricModelProvider {
     }
 
     private static ModelTemplate createModBlock(String string, TextureSlot... textureSlots) {
-        return new ModelTemplate(Optional.of(new ResourceLocation(PicnicMod.MOD_ID, "block/" + string)),Optional.empty(), textureSlots);
+        return new ModelTemplate(Optional.of(ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID, "block/" + string)),Optional.empty(), textureSlots);
     }
 }

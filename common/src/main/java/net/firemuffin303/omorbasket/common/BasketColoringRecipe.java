@@ -11,6 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -22,11 +23,11 @@ public class BasketColoringRecipe extends CustomRecipe {
     }
 
     @Override
-    public boolean matches(CraftingContainer container, Level level) {
+    public boolean matches(CraftingInput craftingInput, Level level) {
         int i = 0 , j = 0;
 
-        for(int k = 0; k < container.getContainerSize(); ++k) {
-            ItemStack itemStack = container.getItem(k);
+        for(int k = 0; k < craftingInput.size(); ++k) {
+            ItemStack itemStack = craftingInput.getItem(k);
             if (!itemStack.isEmpty()) {
                 if (Block.byItem(itemStack.getItem()) instanceof BasketBlock) {
                     ++i;
@@ -48,12 +49,12 @@ public class BasketColoringRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container, HolderLookup.Provider provider) {
+    public ItemStack assemble(CraftingInput craftingInput, HolderLookup.Provider provider) {
         ItemStack itemStack = ItemStack.EMPTY;
         DyeItem dyeItem = (DyeItem) Items.WHITE_DYE;
 
-        for(int i = 0; i < container.getContainerSize(); ++i) {
-            ItemStack itemStack2 = container.getItem(i);
+        for(int i = 0; i < craftingInput.size(); ++i) {
+            ItemStack itemStack2 = craftingInput.getItem(i);
             if (!itemStack2.isEmpty()) {
                 Item item = itemStack2.getItem();
                 if (Block.byItem(item) instanceof BasketBlock) {

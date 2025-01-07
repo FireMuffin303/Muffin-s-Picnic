@@ -40,13 +40,13 @@ import java.util.function.Supplier;
 
 public class ModPlatformImpl {
     public static <T extends Block> Supplier<T> registryBlock(String id, Supplier<T> block) {
-        T block1 = Registry.register(BuiltInRegistries.BLOCK,new ResourceLocation(PicnicMod.MOD_ID,id),block.get());
+        T block1 = Registry.register(BuiltInRegistries.BLOCK,ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,id),block.get());
         return () -> block1;
     }
 
 
     public static <T extends Item> Supplier<T> registryItem(String id, Supplier<T> item) {
-        T item1 = Registry.register(BuiltInRegistries.ITEM,new ResourceLocation(PicnicMod.MOD_ID,id),item.get());
+        T item1 = Registry.register(BuiltInRegistries.ITEM,ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,id),item.get());
         return () -> item1;
     }
 
@@ -60,12 +60,12 @@ public class ModPlatformImpl {
     }
 
     public static <T extends BlockEntity> Supplier<BlockEntityType<T>> registerBlockEntity(String id, ModPlatform.BlockEntitySupplier<T> blockEntityTypeSupplier, Block... blocks) {
-        BlockEntityType<T> blockEntityType = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,new ResourceLocation(PicnicMod.MOD_ID,id),BlockEntityType.Builder.of(blockEntityTypeSupplier::create, blocks).build(null));
+        BlockEntityType<T> blockEntityType = Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE,ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,id),BlockEntityType.Builder.of(blockEntityTypeSupplier::create, blocks).build(null));
         return () -> blockEntityType;
     }
 
     public static <T extends AbstractContainerMenu> MenuType<T> registryMenu(String id, ModPlatform.MenuSupplier<T> menu) {
-        return Registry.register(BuiltInRegistries.MENU,new ResourceLocation(PicnicMod.MOD_ID,id),new MenuType(menu::create, FeatureFlags.VANILLA_SET));
+        return Registry.register(BuiltInRegistries.MENU,ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,id),new MenuType(menu::create, FeatureFlags.VANILLA_SET));
     }
 
     public static <M extends AbstractContainerMenu,U extends Screen & MenuAccess<M>> void registerScreen(MenuType<M> menuType, ModPlatform.ScreenConstructor<M, U> screen) {
@@ -81,14 +81,14 @@ public class ModPlatformImpl {
     }
 
     public static ResourceLocation registryCustomStat(String id) {
-        ResourceLocation resourceLocation = new ResourceLocation(PicnicMod.MOD_ID,id);
+        ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,id);
         Registry.register(BuiltInRegistries.CUSTOM_STAT,id,resourceLocation);
         Stats.CUSTOM.get(resourceLocation, StatFormatter.DEFAULT);
         return resourceLocation;
     }
 
     public static <T extends Recipe<?>> Supplier<RecipeSerializer<T>> registerRecipeSerializer(String id, Supplier<RecipeSerializer<T>> recipeSerializer) {
-        RecipeSerializer<T> recipeSerializer1 = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,new ResourceLocation(PicnicMod.MOD_ID,id),recipeSerializer.get());
+        RecipeSerializer<T> recipeSerializer1 = Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,id),recipeSerializer.get());
         return () -> recipeSerializer1;
     }
 

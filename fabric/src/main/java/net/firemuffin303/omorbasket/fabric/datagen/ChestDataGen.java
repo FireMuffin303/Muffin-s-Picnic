@@ -20,15 +20,14 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
 public class ChestDataGen extends SimpleFabricLootTableProvider {
-    ResourceKey<LootTable> PICNIC_BASKET = ResourceKey.create(Registries.LOOT_TABLE,new ResourceLocation(PicnicMod.MOD_ID,"chests/village/picnic_basket"));
+    ResourceKey<LootTable> PICNIC_BASKET = ResourceKey.create(Registries.LOOT_TABLE,ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,"chests/village/picnic_basket"));
 
     public ChestDataGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(output, registryLookup, LootContextParamSets.CHEST);
     }
 
     @Override
-    public void generate(HolderLookup.Provider provider, BiConsumer<ResourceKey<LootTable>, LootTable.Builder> biConsumer) {
-
+    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> biConsumer) {
         biConsumer.accept(PICNIC_BASKET,
                 LootTable.lootTable().withPool(LootPool.lootPool()
                         .setRolls(UniformGenerator.between(1,5))

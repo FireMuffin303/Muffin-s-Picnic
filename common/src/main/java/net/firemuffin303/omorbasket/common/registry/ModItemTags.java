@@ -7,6 +7,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 public class ModItemTags {
-    public static final TagKey<Item> PICNIC_BASKET_BLACKLIST = TagKey.create(Registries.ITEM, new ResourceLocation(PicnicMod.MOD_ID,"picnic_basket_blacklist"));
-    public static final TagKey<Item> PICNIC_BASKET_WHITELIST = TagKey.create(Registries.ITEM,new ResourceLocation(PicnicMod.MOD_ID,"picnic_basket_whitelist"));
+    public static final TagKey<Item> PICNIC_BASKET_BLACKLIST = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,"picnic_basket_blacklist"));
+    public static final TagKey<Item> PICNIC_BASKET_WHITELIST = TagKey.create(Registries.ITEM,ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,"picnic_basket_whitelist"));
 }

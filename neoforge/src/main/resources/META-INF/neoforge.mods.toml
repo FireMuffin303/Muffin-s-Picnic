@@ -16,14 +16,14 @@ logoFile = "icon.png"
 [[dependencies.muffins_picnic]]
 modId = "neoforge"
 type = "required"
-versionRange = "[20.5.21-beta,)"
+versionRange = "[21.0.143,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.muffins_picnic]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.20.5,)"
+versionRange = "[1.21,)"
 ordering = "NONE"
 side = "BOTH"
 

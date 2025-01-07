@@ -33,15 +33,15 @@ public class PicnicMod {
     }
 
     public static void initVillagerStructures(MinecraftServer server){
-        addToStructurePool(server,new ResourceLocation("minecraft","village/plains/houses"),
-                new ResourceLocation(PicnicMod.MOD_ID, "village/plains/picnic"),1);
+        addToStructurePool(server,ResourceLocation.fromNamespaceAndPath("minecraft","village/plains/houses"),
+                ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID, "village/plains/picnic"),1);
 
     }
 
     //Learned how it worked from Farmer's Delight Fabric
     public static void addToStructurePool(MinecraftServer server, ResourceLocation poolIdentifier, ResourceLocation nbtIdentifier, int weight) {
         Holder<StructureProcessorList> emptyProcessList = server.registryAccess().registryOrThrow(Registries.PROCESSOR_LIST)
-                .getHolderOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, new ResourceLocation("minecraft", "empty")));
+                .getHolderOrThrow(ResourceKey.create(Registries.PROCESSOR_LIST, ResourceLocation.fromNamespaceAndPath("minecraft", "empty")));
         Registry<StructureTemplatePool> structureTemplatePools = server.registryAccess().registry(Registries.TEMPLATE_POOL).orElseThrow();
 
         StructureTemplatePool structure = structureTemplatePools.get(poolIdentifier);

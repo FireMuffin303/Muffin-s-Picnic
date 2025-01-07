@@ -50,7 +50,7 @@ public class ModPlatformImpl {
     }
 
     public static <M extends AbstractContainerMenu,U extends Screen & MenuAccess<M>> void registerScreen(MenuType<M> menuType, ModPlatform.ScreenConstructor<M, U> screen) {
-        MenuScreens.register(menuType,screen::create);
+
     }
 
     public static <T extends Entity> void registerEntityRenderer(EntityType<T> entityTypeSupplier, EntityRendererProvider<T> entityRendererProvider) {
@@ -58,7 +58,7 @@ public class ModPlatformImpl {
     }
 
     public static ResourceLocation registryCustomStat(String id) {
-        ResourceLocation resourceLocation = new ResourceLocation(PicnicMod.MOD_ID,id);
+        ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(PicnicMod.MOD_ID,id);
         OmorBasketNeoForge.CUSTOM_STAT.register(id,() -> resourceLocation);
         //Stats.CUSTOM.get(resourceLocation, StatFormatter.DEFAULT);
         return resourceLocation;

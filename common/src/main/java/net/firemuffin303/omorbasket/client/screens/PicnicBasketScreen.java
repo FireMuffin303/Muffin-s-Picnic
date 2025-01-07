@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class PicnicBasketScreen extends AbstractContainerScreen<PicnicBasketMenu> {
-    private static final ResourceLocation CONTAINER_LOCATION = new ResourceLocation("textures/gui/container/dispenser.png");
+    private static final ResourceLocation CONTAINER_LOCATION = ResourceLocation.fromNamespaceAndPath("minecraft","textures/gui/container/dispenser.png");
     public PicnicBasketScreen(PicnicBasketMenu abstractContainerMenu, Inventory inventory, Component component) {
         super(abstractContainerMenu, inventory, component);
     }

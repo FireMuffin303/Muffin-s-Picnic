@@ -5,6 +5,8 @@ import net.firemuffin303.omorbasket.client.BasketTooltipComponent;
 import net.firemuffin303.omorbasket.client.registry.ModBlockEntityRenderer;
 import net.firemuffin303.omorbasket.client.registry.ModScreens;
 import net.firemuffin303.omorbasket.ModPlatform;
+import net.firemuffin303.omorbasket.client.screens.PicnicBasketScreen;
+import net.firemuffin303.omorbasket.common.registry.ModMenuType;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -16,6 +18,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 import java.util.function.Supplier;
 
@@ -23,11 +26,6 @@ import java.util.function.Supplier;
 public class PicnicBasketNeoForgeClient {
 
     public static void init(){}
-
-    @SubscribeEvent
-    public static void clientSetup(FMLClientSetupEvent event){
-        event.enqueueWork(ModScreens::init) ;
-    }
 
     @SubscribeEvent
     public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event){
@@ -52,6 +50,11 @@ public class PicnicBasketNeoForgeClient {
     @SubscribeEvent
     public static void registerTooltip(RegisterClientTooltipComponentFactoriesEvent tooltipEvent){
         tooltipEvent.register(BasketTooltipComponent.class, BasketTooltipComponent.ClientBasketTooltipComponent::new);
+    }
+
+    @SubscribeEvent
+    public static void registerScreen(RegisterMenuScreensEvent event){
+        event.register(ModMenuType.PICNIC_BASKET, PicnicBasketScreen::new);
     }
 
 }
