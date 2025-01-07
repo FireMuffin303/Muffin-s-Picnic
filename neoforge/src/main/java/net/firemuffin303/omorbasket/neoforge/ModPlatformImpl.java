@@ -24,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.function.Supplier;
 
@@ -84,8 +85,7 @@ public class ModPlatformImpl {
     }
 
     public static boolean getFoodTag(ItemStack itemStack) {
-        //Forge doesn't have food tag somehow.
-        return itemStack.isEdible();
+        return itemStack.is(Tags.Items.FOODS);
     }
 
 }

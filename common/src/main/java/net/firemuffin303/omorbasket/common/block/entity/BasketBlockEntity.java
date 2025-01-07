@@ -5,11 +5,9 @@ import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.common.block.BasketBlock;
 import net.firemuffin303.omorbasket.common.menu.PicnicBasketMenu;
 import net.firemuffin303.omorbasket.common.registry.ModBlocks;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.Vec3i;
+import net.minecraft.core.*;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -66,10 +64,12 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
         };
     }
 
-    protected void saveAdditional(CompoundTag compoundTag) {
-        super.saveAdditional(compoundTag);
+    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.saveAdditional(compoundTag,provider);
+
         if (!this.trySaveLootTable(compoundTag)) {
-            ContainerHelper.saveAllItems(compoundTag, this.items);
+            ContainerHelper.saveAllItems(compoundTag, this.items,false,provider);
+
         }
 
     }
@@ -78,11 +78,12 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
         return this.color;
     }
 
-    public void load(CompoundTag compoundTag) {
-        super.load(compoundTag);
+    public void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
+        super.loadAdditional(compoundTag,provider);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        if (!this.tryLoadLootTable(compoundTag)) {
-            ContainerHelper.loadAllItems(compoundTag, this.items);
+        if (!this.tryLoadLootTable(compoundTag) && compoundTag.contains("Items", 9)) {
+            ContainerHelper.loadAllItems(compoundTag, this.items, provider);
+            LogUtils.getLogger().info(this.items.toString());
         }
 
     }
@@ -109,7 +110,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 
     @Override
     public int getContainerSize() {
-        return 9;
+        return this.items.size();
     }
 
     public void startOpen(Player player) {
@@ -163,7 +164,7 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        return this.saveWithoutMetadata(provider);
     }
 }

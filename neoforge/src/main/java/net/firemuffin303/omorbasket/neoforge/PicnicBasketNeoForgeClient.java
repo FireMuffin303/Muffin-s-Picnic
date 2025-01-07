@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -18,7 +19,7 @@ import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactori
 
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = PicnicMod.MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = PicnicMod.MOD_ID,bus = EventBusSubscriber.Bus.MOD)
 public class PicnicBasketNeoForgeClient {
 
     public static void init(){}

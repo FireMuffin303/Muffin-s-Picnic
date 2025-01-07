@@ -18,7 +18,7 @@
     "CCC"
   ],
   "result": {
-    "item": "muffins_picnic:blue_picnic_basket"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "muffins_picnic:blue_picnic_basket"
+  }
 }

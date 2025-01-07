@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:purple_carpet"
-            ]
+            "items": "minecraft:purple_carpet"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_purple_carpet",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_purple_carpet"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:crafting/purple_picnic_basket_from_crafting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

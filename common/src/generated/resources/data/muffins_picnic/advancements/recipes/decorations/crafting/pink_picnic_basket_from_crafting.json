@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:pink_carpet"
-            ]
+            "items": "minecraft:pink_carpet"
           }
         ]
       },
@@ -22,14 +20,13 @@
   },
   "requirements": [
     [
-      "has_pink_carpet",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_pink_carpet"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:crafting/pink_picnic_basket_from_crafting"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -68,7 +68,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 
     }
 
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    public InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
@@ -88,11 +88,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
         if (blockEntity instanceof BasketBlockEntity basketBlockEntity) {
             if (!level.isClientSide && player.isCreative() && !basketBlockEntity.isEmpty()) {
                 ItemStack itemStack = new ItemStack(getBlockByColor(this.getColor()));
-                blockEntity.saveToItem(itemStack);
-                if (basketBlockEntity.hasCustomName()) {
-                    itemStack.setHoverName(basketBlockEntity.getCustomName());
-                }
-
+                itemStack.applyComponents(blockEntity.collectComponents());
                 ItemEntity itemEntity = new ItemEntity(level, (double)blockPos.getX() + 0.5D, (double)blockPos.getY() + 0.5D, (double)blockPos.getZ() + 0.5D, itemStack);
                 itemEntity.setDefaultPickUpDelay();
                 level.addFreshEntity(itemEntity);
@@ -116,16 +112,6 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
         }
 
         return super.getDrops(blockState, builder);
-    }
-
-    public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, LivingEntity livingEntity, ItemStack itemStack) {
-        if (itemStack.hasCustomHoverName()) {
-            BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof BasketBlockEntity) {
-                ((BasketBlockEntity)blockEntity).setCustomName(itemStack.getHoverName());
-            }
-        }
-
     }
 
     @Nullable
@@ -156,7 +142,7 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     public ItemStack getCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         ItemStack itemStack = super.getCloneItemStack(levelReader, blockPos, blockState);
         levelReader.getBlockEntity(blockPos, ModBlocks.ModBlockEntityTypes.BASKET_BLOCK_ENTITY.get()).ifPresent((basketBlockEntity) -> {
-            basketBlockEntity.saveToItem(itemStack);
+            basketBlockEntity.saveToItem(itemStack,levelReader.registryAccess());
         });
         return itemStack;
     }

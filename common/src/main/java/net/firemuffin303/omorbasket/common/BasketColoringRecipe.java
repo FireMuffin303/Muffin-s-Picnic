@@ -2,6 +2,7 @@ package net.firemuffin303.omorbasket.common;
 
 import net.firemuffin303.omorbasket.common.block.BasketBlock;
 import net.firemuffin303.omorbasket.common.registry.ModRecipeSerializer;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -47,7 +48,7 @@ public class BasketColoringRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container, RegistryAccess registryAccess) {
+    public ItemStack assemble(CraftingContainer container, HolderLookup.Provider provider) {
         ItemStack itemStack = ItemStack.EMPTY;
         DyeItem dyeItem = (DyeItem) Items.WHITE_DYE;
 
@@ -63,12 +64,8 @@ public class BasketColoringRecipe extends CustomRecipe {
             }
         }
 
-        ItemStack itemStack3 = new ItemStack(BasketBlock.getBlockByColor(dyeItem.getDyeColor()));
-        if (itemStack.hasTag()) {
-            itemStack3.setTag(itemStack.getTag().copy());
-        }
-
-        return itemStack3;
+        Block block = BasketBlock.getBlockByColor(dyeItem.getDyeColor());
+        return itemStack.transmuteCopy(block,1);
     }
 
     @Override

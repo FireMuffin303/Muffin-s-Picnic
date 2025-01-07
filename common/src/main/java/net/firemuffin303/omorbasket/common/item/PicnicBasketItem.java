@@ -2,12 +2,14 @@ package net.firemuffin303.omorbasket.common.item;
 
 import net.firemuffin303.omorbasket.client.BasketTooltipComponent;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,20 +19,12 @@ import java.util.stream.Stream;
 
 public class PicnicBasketItem extends BlockItem {
     public PicnicBasketItem(Block block) {
-        super(block, new Properties().stacksTo(1));
+        super(block, new Properties().stacksTo(1).component(DataComponents.CONTAINER,ItemContainerContents.EMPTY));
     }
 
     private static Stream<ItemStack> getContents(ItemStack itemStack) {
-        CompoundTag compoundTag = itemStack.getTag();
-        if (compoundTag == null) {
-            return Stream.empty();
-        } else {
-            CompoundTag compoundTag2 = compoundTag.getCompound("BlockEntityTag");
-            ListTag listTag = compoundTag2.getList("Items", 10);
-            Stream<Tag> var10000 = listTag.stream();
-            Objects.requireNonNull(CompoundTag.class);
-            return var10000.map(CompoundTag.class::cast).map(ItemStack::of);
-        }
+        ItemContainerContents containerContents = itemStack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY);
+        return containerContents.nonEmptyStream();
     }
 
     public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack itemStack) {

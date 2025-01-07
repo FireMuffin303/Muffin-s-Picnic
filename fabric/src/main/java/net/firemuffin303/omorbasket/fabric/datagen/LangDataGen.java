@@ -3,14 +3,17 @@ package net.firemuffin303.omorbasket.fabric.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.firemuffin303.omorbasket.common.registry.ModItems;
+import net.minecraft.core.HolderLookup;
+
+import java.util.concurrent.CompletableFuture;
 
 public class LangDataGen extends FabricLanguageProvider {
-    protected LangDataGen(FabricDataOutput dataOutput) {
-        super(dataOutput);
+    protected LangDataGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        super(dataOutput, registryLookup);
     }
 
     @Override
-    public void generateTranslations(TranslationBuilder translationBuilder) {
+    public void generateTranslations(HolderLookup.Provider provider, TranslationBuilder translationBuilder) {
         translationBuilder.add("muffins_picnic.container.basket","Picnic Basket");
         translationBuilder.add(ModItems.WHITE_PICNIC_BASKET.get(),"White Picnic Basket");
         translationBuilder.add(ModItems.LIGHT_GRAY_PICNIC_BASKET.get(),"Light Gray Picnic Basket");
@@ -29,16 +32,15 @@ public class LangDataGen extends FabricLanguageProvider {
         translationBuilder.add(ModItems.MAGENTA_PICNIC_BASKET.get(),"Magenta Picnic Basket");
         translationBuilder.add(ModItems.PINK_PICNIC_BASKET.get(),"Pink Picnic Basket");
         translationBuilder.add("stat.muffins_picnic.open_picnic_basket","Picnic Basket Opened");
-
     }
 
     static class ThaiLangDataGen extends FabricLanguageProvider {
-        protected ThaiLangDataGen(FabricDataOutput dataOutput) {
-            super(dataOutput,"th_th");
+        protected ThaiLangDataGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+            super(dataOutput,"th_th",registryLookup);
         }
 
         @Override
-        public void generateTranslations(TranslationBuilder translationBuilder) {
+        public void generateTranslations(HolderLookup.Provider provider, TranslationBuilder translationBuilder) {
             translationBuilder.add("muffins_picnic.container.basket","ตะกร้าปิกนิก");
             translationBuilder.add(ModItems.WHITE_PICNIC_BASKET.get(),"ตะกร้าปิกนิกสีขาว");
             translationBuilder.add(ModItems.LIGHT_GRAY_PICNIC_BASKET.get(),"ตะกร้าปิกนิกสีเทาอ่อน");

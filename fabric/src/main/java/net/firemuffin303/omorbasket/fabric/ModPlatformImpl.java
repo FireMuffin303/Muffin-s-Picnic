@@ -1,5 +1,6 @@
 package net.firemuffin303.omorbasket.fabric;
 
+import com.mojang.logging.LogUtils;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;

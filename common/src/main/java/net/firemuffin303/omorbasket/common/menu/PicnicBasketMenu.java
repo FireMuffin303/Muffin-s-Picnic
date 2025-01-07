@@ -4,6 +4,7 @@ import net.firemuffin303.omorbasket.PicnicMod;
 import net.firemuffin303.omorbasket.common.registry.ModItemTags;
 import net.firemuffin303.omorbasket.common.registry.ModMenuType;
 import net.firemuffin303.omorbasket.ModPlatform;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -101,7 +102,7 @@ public class PicnicBasketMenu extends AbstractContainerMenu {
                 }
                 return itemStack.getItem().canFitInsideContainerItems();
             }else if(picnicAllowance == PicnicMod.PicnicAllowance.ONLY_FOOD){
-                return (itemStack.getItem().isEdible() || ModPlatform.getFoodTag(itemStack)) && itemStack.getItem().canFitInsideContainerItems();
+                return (itemStack.has(DataComponents.FOOD) || ModPlatform.getFoodTag(itemStack)) && itemStack.getItem().canFitInsideContainerItems();
             } else if (picnicAllowance == PicnicMod.PicnicAllowance.ONLY_WHITELIST) {
                 return itemStack.is(ModItemTags.PICNIC_BASKET_WHITELIST) && itemStack.getItem().canFitInsideContainerItems();
             }

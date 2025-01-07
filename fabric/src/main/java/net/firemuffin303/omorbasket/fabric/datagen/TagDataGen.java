@@ -5,8 +5,10 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.firemuffin303.omorbasket.common.registry.ModItemTags;
 import net.firemuffin303.omorbasket.common.registry.ModItems;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -22,7 +24,10 @@ public class TagDataGen extends FabricTagProvider.ItemTagProvider{
                     .add(item);
         });
 
-        BuiltInRegistries.ITEM.stream().filter(Item::isEdible).forEach(item -> {
+        BuiltInRegistries.ITEM.stream().filter(item -> {
+            ItemStack itemStack = new ItemStack(item);
+            return itemStack.has(DataComponents.FOOD);
+        }).forEach(item -> {
             getOrCreateTagBuilder(ModItemTags.PICNIC_BASKET_WHITELIST).add(item);
         });
 

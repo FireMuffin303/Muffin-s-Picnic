@@ -1,5 +1,6 @@
 package net.firemuffin303.omorbasket.fabric.datagen;
 
+import com.mojang.logging.LogUtils;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.firemuffin303.omorbasket.PicnicMod;

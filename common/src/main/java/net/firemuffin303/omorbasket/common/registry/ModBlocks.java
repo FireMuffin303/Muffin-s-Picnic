@@ -41,8 +41,9 @@ public class ModBlocks {
     }
 
     public static Supplier<Block> register(String id, Supplier<Block> block){
-        PICNIC.add(block);
-        return ModPlatform.registryBlock(id,block);
+        Supplier<Block> blockSupplier = ModPlatform.registryBlock(id,block);
+        PICNIC.add(blockSupplier);
+        return blockSupplier;
     }
 
     static{

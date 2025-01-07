@@ -5,17 +5,18 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.firemuffin303.omorbasket.common.BasketColoringRecipe;
 import net.firemuffin303.omorbasket.common.registry.ModItems;
 import net.firemuffin303.omorbasket.common.registry.ModRecipeSerializer;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 public class RecipeLangDataGen extends FabricRecipeProvider {
-
-    public RecipeLangDataGen(FabricDataOutput output) {
-        super(output);
+    public RecipeLangDataGen(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(output, registriesFuture);
     }
 
     @Override
