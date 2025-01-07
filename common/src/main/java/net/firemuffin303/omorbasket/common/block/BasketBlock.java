@@ -1,5 +1,6 @@
 package net.firemuffin303.omorbasket.common.block;
 
+import com.mojang.logging.LogUtils;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.firemuffin303.omorbasket.common.block.entity.BasketBlockEntity;
@@ -7,9 +8,8 @@ import net.firemuffin303.omorbasket.common.registry.ModBlocks;
 import net.firemuffin303.omorbasket.common.registry.ModStat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.stats.Stats;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -18,15 +18,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -73,8 +74,8 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
             return InteractionResult.SUCCESS;
         } else {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof BasketBlockEntity) {
-                player.openMenu((BasketBlockEntity)blockEntity);
+            if (blockEntity instanceof BasketBlockEntity basketBlockEntity) {
+                player.openMenu(basketBlockEntity);
                 player.awardStat(ModStat.OPEN_PICNIC_BASKET);
                 PiglinAi.angerNearbyPiglins(player, true);
             }
@@ -183,8 +184,23 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        FluidState fluidState = blockPlaceContext.getLevel().getFluidState(blockPlaceContext.getClickedPos());
-        return (BlockState)this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+        LevelAccessor levelAccessor = blockPlaceContext.getLevel();
+        BlockPos blockPos = blockPlaceContext.getClickedPos();
+        boolean bl = levelAccessor.getFluidState(blockPos).getType() == Fluids.WATER;
+        return this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, bl);
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+        if(blockState.getValue(WATERLOGGED)){
+            levelAccessor.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
+        }
+        return super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
+    }
+
+    @Override
+    protected FluidState getFluidState(BlockState blockState) {
+        return (Boolean)blockState.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(blockState);
     }
 
     @Nullable

@@ -66,10 +66,8 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 
     protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
         super.saveAdditional(compoundTag,provider);
-
         if (!this.trySaveLootTable(compoundTag)) {
             ContainerHelper.saveAllItems(compoundTag, this.items,false,provider);
-
         }
 
     }
@@ -80,12 +78,24 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 
     public void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
         super.loadAdditional(compoundTag,provider);
+        this.loadFromNBTTag(compoundTag,provider);
+    }
+
+    protected void loadFromNBTTag(CompoundTag compoundTag, HolderLookup.Provider provider){
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         if (!this.tryLoadLootTable(compoundTag) && compoundTag.contains("Items", 9)) {
-            ContainerHelper.loadAllItems(compoundTag, this.items, provider);
-            LogUtils.getLogger().info(this.items.toString());
-        }
+            ListTag listTag = compoundTag.getList("Items",10);
+            for(int i = 0; i < listTag.size(); ++i) {
+                CompoundTag compoundTag1 = listTag.getCompound(i);
+                if(compoundTag1.contains("Count",99)){
+                    byte count = compoundTag1.getByte("Count");
+                    compoundTag1.remove("Count");
+                    compoundTag1.putInt("count",count);
+                }
 
+            }
+            ContainerHelper.loadAllItems(compoundTag, this.items, provider);
+        }
     }
 
     @Override
@@ -165,6 +175,6 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
-        return this.saveWithoutMetadata(provider);
+        return this.saveCustomOnly(provider);
     }
 }
